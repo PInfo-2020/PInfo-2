@@ -9,7 +9,7 @@ Repository for PInfo-2020's team 2
 - David Rodriguez Soares
 - Loan Hérault
 - Julien Mehmeti
-- Kathleen
+- Kathleen Favre
 
 ## How to set up your project:
 
