@@ -4,8 +4,8 @@ Repository for PInfo-2020's team 2
 
 ## Team members:
 
-- Svetlana Reisone: chef de projet
-- Mark Tropin: admin système
+- Svetlana Reisone: Chef de projet
+- Mark Tropin: Admin système
 - David Rodriguez Soares
 - Loan Hérault
 - Julien Mehmeti
