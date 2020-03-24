@@ -1,12 +1,15 @@
-# Your Project's Name
+# Kernel 2.0
 
 Repository for PInfo-2020's team 2
 
 ## Team members:
 
-- Team member 1: role
-- Team member 2: role
-- ...
+- Svetlana Reisone: chef de projet
+- Mark Tropin: admin système
+- David Rodriguez Soares
+- Loan Hérault
+- Julien Mehmeti
+- Kathleen
 
 ## How to set up your project:
 
