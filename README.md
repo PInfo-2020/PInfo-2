@@ -42,3 +42,8 @@ Below is the list of tasks you will need to complete to set up continuous integr
 10. The last step is to set up the continuous deployment of the application on your team's server. Try to find how to do this ! Hint 1: Things should happen in the `.travis.yml` file. Hint 2: SSH is your friend. Hint 3: For the time being, you can just use docker-compose (you will see how to use Kubernetes later in the course). You might find some useful commands in the second blog post on hostettler.net.
 
 Feel free to remove the steps above from your README.md once you're done with the set up.
+
+
+## APIs
+
+1. Spring seems like a viable option to interact with Facebook and Twitter : https://docs.spring.io/
