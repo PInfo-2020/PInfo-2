@@ -6,10 +6,6 @@ env:
 services:
   - docker
 
-addons:
-  sonarcloud:
-    organization: "hostettler-github" # the key of the org you chose at step #3
-
 cache:
     directories:
       - .autoconf
@@ -49,3 +45,19 @@ jobs:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin      
       - docker tag unige/web-ui stevehostettler/web-ui:latest      
       - docker push stevehostettler/web-ui:latest
+
+addons:
+  sonarcloud:
+    organization: "pinfo-2020"
+    token:
+      secure: "cqm24L9BmfaHr5xVgD8JZxZexq0XLRiR0AvMwck5TtIFAl0sJFb47iwL7XKYoob3iIrtqOpp0h4hrD5VJBgWHnSQ+Ap0r4k749es5ptHV46H8PrsF3r9wR1PAUKm8Vo0YPt1t1J6KVIMwlRHqNUgiRlKwFD4VCeHqm8dmawYmNdj19hyz/eeaZ6zfIXvUxi/MdOki83VVVtJv3UtIkFPSTeuWRpy5O61KACAcdJeRgveA0bG25xkRvV1kHL6N2/tQlLWxuZ0cxQIxedYcl/kutkI4+bofnYX/LwgAlX2ha6bax30/uM4hZlwFhOgFx6QUZgZtoip7bg9G5d3s3jsCcSYMYFSxRCFEuROi+mLt6aCFZS13UvuXUYQOaHZexXF62J8WQqhcYTxrt8DTaVpQRI7aJ/dzLGChuYuMVe6F4Ngx/VqaWEyeqAgvEabsWvnT19L7ZYMHg+pOXrWbX/5kiOPOzSrnofyp4X/vEtSmAek/pV/U4mhF9d8hHexH7HD/huL2yapo/HZ1u4W6jMhtkbW2lfimJpUiQuzCS3mdcMDxpPRPbXk2DeZ+xxBndvZNkCDnvkoiwknqgT2eTKzilMX2u5z3y3ViB2n/b+e6gCbsoXYEctGtbnmaS3KzdUq5gII9sJ96o9ptEw68U29qoLfQbLKa+VpfEBj1JDUX0I="
+
+addons:
+  sonarcloud:
+    organization: "pinfo-2020"
+    token:
+      secure: "" encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
