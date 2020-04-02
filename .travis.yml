@@ -1,57 +1,54 @@
 language: java
-
 env:
+  matrix:
   - NODE_VERSION="12.13.1"
-  
+  global:
+    secure: gBFW0p04y3kmY/EJ6f3FbhMI369bYBkhoaqnfX0NPyiu3qCm0P6NpBgBX24ypVJ+bD5ed44mecukqpbv9ailRpVdckSgL4jcRDUyMZPSb3S/+Cvh28fEFnFd0feIuoMLNHDUKxhsLtrIG6wC0oP46SsS6NM8W4fYTb5cDg/YkaZpMwmIBtobyqnKRswMHJ2MXap1iIVQmIG9kMXDk1GZw5FMfwUvj4DS2tNG3GJtbsPe0g52WpesexQuidDFyKAn5qCP132cP2hNvUPk92/EcrxY0AWcfvUji+d5+NWS3HtxSaulktB38WKjs9u7x65r5bM8D0Dg9yxszbMQsxfZJbdaYkGVm0CdD0EcDYznZugW6SzED+STocy5QlPrYctgR0x7wsRwHqif0GqiWR6HGAI+5gP5th4Z7a9kvCtA87tJSsHvxG52sWVvsswqkQYwn3pUQfvausiYNOkYpoArWQMAzNGvNJdxS66C0NnXTm5KQA/btdHziPW/5zBQN8bxCkYyPS/5aRcQa5oPQcTg+QN4sGBddiUGjbdXxyACN+NjhmtSOQl6LEcYCQcz2VOmUvHInaDCcB7ToegzDkSihproZzyQkSPIEAuvizbWJdSOFIj91UOYeQjA0RHClEqBhd+MnMT75RGPNZLc2aZDo1wIQk4aA071e01kh9Tsj3c=
 services:
-  - docker
-
+- docker
 cache:
-    directories:
-      - .autoconf
-      - $HOME/.m2
-      - node_modules
-
+  directories:
+  - ".autoconf"
+  - "$HOME/.m2"
+  - node_modules
 jobs:
   include:
-    - stage: Prepare
-      script:
-      - nvm install $NODE_VERSION
-      - mvn install -N -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-    - stage : Build
-      script:
-      - mvn install -Ppackage-docker-image  
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker tag unige/api-gateway stevehostettler/api-gateway:latest
-      - docker tag unige/regulatory-service stevehostettler/regulatory-service:latest
-      - docker tag unige/valuation-service stevehostettler/valuation-service:latest
-      - docker tag unige/instrument-service stevehostettler/instrument-service:latest
-      - docker tag unige/counterparty-service stevehostettler/counterparty-service:latest     
-      - docker push stevehostettler/api-gateway:latest
-      - docker push stevehostettler/regulatory-service:latest
-      - docker push stevehostettler/valuation-service:latest
-      - docker push stevehostettler/instrument-service:latest
-      - docker push stevehostettler/counterparty-service:latest
-      - mvn sonar:sonar -Dsonar.projectKey=hostettler_microservices -Dsonar.organization=hostettler-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=10de2947edc0e089a82360cb2d1aa97482fafc28     
-    - stage : Build
-      script:
-      - cd web-ui
-      - pwd
-      - npm -v
-      - npm install
-      - npm update
-      - npm run-script build --prod
-      - docker build -t unige/web-ui .
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin      
-      - docker tag unige/web-ui stevehostettler/web-ui:latest      
-      - docker push stevehostettler/web-ui:latest
-
+  - stage: Prepare
+    script:
+    - nvm install $NODE_VERSION
+    - mvn install -N -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - stage: Build
+    script:
+    - mvn install -Ppackage-docker-image
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag unige/api-gateway stevehostettler/api-gateway:latest
+    - docker tag unige/regulatory-service stevehostettler/regulatory-service:latest
+    - docker tag unige/valuation-service stevehostettler/valuation-service:latest
+    - docker tag unige/instrument-service stevehostettler/instrument-service:latest
+    - docker tag unige/counterparty-service stevehostettler/counterparty-service:latest
+    - docker push stevehostettler/api-gateway:latest
+    - docker push stevehostettler/regulatory-service:latest
+    - docker push stevehostettler/valuation-service:latest
+    - docker push stevehostettler/instrument-service:latest
+    - docker push stevehostettler/counterparty-service:latest
+    - mvn sonar:sonar -Dsonar.projectKey=hostettler_microservices -Dsonar.organization=hostettler-github
+      -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=10de2947edc0e089a82360cb2d1aa97482fafc28
+  - stage: Build
+    script:
+    - cd web-ui
+    - pwd
+    - npm -v
+    - npm install
+    - npm update
+    - npm run-script build --prod
+    - docker build -t unige/web-ui .
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag unige/web-ui stevehostettler/web-ui:latest
+    - docker push stevehostettler/web-ui:latest
 addons:
   sonarcloud:
-    organization: "pinfo-2020"
+    organization: pinfo-2020
     token:
-      secure: "cqm24L9BmfaHr5xVgD8JZxZexq0XLRiR0AvMwck5TtIFAl0sJFb47iwL7XKYoob3iIrtqOpp0h4hrD5VJBgWHnSQ+Ap0r4k749es5ptHV46H8PrsF3r9wR1PAUKm8Vo0YPt1t1J6KVIMwlRHqNUgiRlKwFD4VCeHqm8dmawYmNdj19hyz/eeaZ6zfIXvUxi/MdOki83VVVtJv3UtIkFPSTeuWRpy5O61KACAcdJeRgveA0bG25xkRvV1kHL6N2/tQlLWxuZ0cxQIxedYcl/kutkI4+bofnYX/LwgAlX2ha6bax30/uM4hZlwFhOgFx6QUZgZtoip7bg9G5d3s3jsCcSYMYFSxRCFEuROi+mLt6aCFZS13UvuXUYQOaHZexXF62J8WQqhcYTxrt8DTaVpQRI7aJ/dzLGChuYuMVe6F4Ngx/VqaWEyeqAgvEabsWvnT19L7ZYMHg+pOXrWbX/5kiOPOzSrnofyp4X/vEtSmAek/pV/U4mhF9d8hHexH7HD/huL2yapo/HZ1u4W6jMhtkbW2lfimJpUiQuzCS3mdcMDxpPRPbXk2DeZ+xxBndvZNkCDnvkoiwknqgT2eTKzilMX2u5z3y3ViB2n/b+e6gCbsoXYEctGtbnmaS3KzdUq5gII9sJ96o9ptEw68U29qoLfQbLKa+VpfEBj1JDUX0I="
-
+      secure: cqm24L9BmfaHr5xVgD8JZxZexq0XLRiR0AvMwck5TtIFAl0sJFb47iwL7XKYoob3iIrtqOpp0h4hrD5VJBgWHnSQ+Ap0r4k749es5ptHV46H8PrsF3r9wR1PAUKm8Vo0YPt1t1J6KVIMwlRHqNUgiRlKwFD4VCeHqm8dmawYmNdj19hyz/eeaZ6zfIXvUxi/MdOki83VVVtJv3UtIkFPSTeuWRpy5O61KACAcdJeRgveA0bG25xkRvV1kHL6N2/tQlLWxuZ0cxQIxedYcl/kutkI4+bofnYX/LwgAlX2ha6bax30/uM4hZlwFhOgFx6QUZgZtoip7bg9G5d3s3jsCcSYMYFSxRCFEuROi+mLt6aCFZS13UvuXUYQOaHZexXF62J8WQqhcYTxrt8DTaVpQRI7aJ/dzLGChuYuMVe6F4Ngx/VqaWEyeqAgvEabsWvnT19L7ZYMHg+pOXrWbX/5kiOPOzSrnofyp4X/vEtSmAek/pV/U4mhF9d8hHexH7HD/huL2yapo/HZ1u4W6jMhtkbW2lfimJpUiQuzCS3mdcMDxpPRPbXk2DeZ+xxBndvZNkCDnvkoiwknqgT2eTKzilMX2u5z3y3ViB2n/b+e6gCbsoXYEctGtbnmaS3KzdUq5gII9sJ96o9ptEw68U29qoLfQbLKa+VpfEBj1JDUX0I=
 script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
