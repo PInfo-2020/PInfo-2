@@ -43,8 +43,8 @@ jobs:
     - npm run-script build --prod
     - docker build -t unige/web-ui .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker tag unige/web-ui stevehostettler/web-ui:latest
-    - docker push stevehostettler/web-ui:latest
+    - docker tag unige/web-ui marktropin/web-ui:latest
+    - docker push marktropin/web-ui:latest
 addons:
   sonarcloud:
     organization: pinfo-2020
