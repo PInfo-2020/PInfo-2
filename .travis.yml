@@ -32,7 +32,7 @@ jobs:
     - docker push marktropin/valuation-service:latest
     - docker push marktropin/instrument-service:latest
     - docker push marktropin/counterparty-service:latest
-    - mvn sonar:sonar -Dsonar.projectKey=PInfo-2 -Dsonar.organization=Group2Project
+    - mvn sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2 -Dsonar.organization=pinfo-2020
       -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=68db16192c9f0533a0926c86cf71c30b2331c97c
   - stage: Build
     script:
@@ -53,3 +53,5 @@ addons:
 		secure: "W9jtjH7IBt0uvMwjL+B63Zw0dEgAMFn6sbo9fjUksgRKSW/IFvRgHk3YtFITnoy6NxG9ytPmPgQtllQEZVCjNsw9xkXpgVZucttiTrdM31bkMFAsyTKjpbix5ddRbLGjl9LewkuHtqJEKex8jRUnZ9tNIrxHhWgCdAiecJhKv5Zt94rfiYwqcXCkEjUWO0dgDVcxk5nQzYpthhpZ1TqgyUxLa3NBJEq8wOZL9/tB3yhLDrfp9/+SP/tV8czbPw+Pn78kHJu5SMs4U7EGZ5bXGKeRujMYtpg+b/6OzQYOqOxB/evyReRkvP3sXGJ4na16MssRS+jBbT7qAibNjPB54Xq3rBq1VZPSDVl8gT5Lr0eJTuxmz/cc0JvpZgE+Owp3c7brLauLL8jQT3NeVXqXc8bkPM13qA36G6Uc4WN+ex9bl6zKI8NA7R4xBaKS1yWmjTAXMM4iaVrWLERXw6cms8Ig1zImbxR9MvXQkaSQS6Tgrf1N7wfiejVXAzLLl4wXq9pcJisktI1dbis84IkuC6RAUbq+Y2VUo/ciJRrQJ4aP16oTi8z7ZlXd6iee/AnUdn0+OwV9QTZhRY+W3uG4Tf87EEqZ6qeUjoTi9Rw99td0rVNuwEnZYoQDmpIjh7mFazdiJn3IFtGgpyoisWJlAmWiWdVZemxwkTjZxc4xNyw="
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
+
+dist: trusty
