@@ -32,7 +32,7 @@ jobs:
     - docker push marktropin/valuation-service:latest
     - docker push marktropin/instrument-service:latest
     - docker push marktropin/counterparty-service:latest
-    - mvn sonar:sonar -Dsonar.projectKey=hostettler_microservices -Dsonar.organization=hostettler-github
+    - mvn sonar:sonar -Dsonar.projectKey=PInfo-2 -Dsonar.organization=Group2Project
       -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=68db16192c9f0533a0926c86cf71c30b2331c97c
   - stage: Build
     script:
