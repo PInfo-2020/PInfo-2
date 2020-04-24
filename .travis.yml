@@ -22,16 +22,16 @@ jobs:
     script:
     - mvn install -Ppackage-docker-image
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker tag unige/api-gateway marktropin/api-gateway:latest
-    - docker tag unige/regulatory-service marktropin/regulatory-service:latest
-    - docker tag unige/valuation-service marktropin/valuation-service:latest
-    - docker tag unige/instrument-service marktropin/instrument-service:latest
-    - docker tag unige/counterparty-service marktropin/counterparty-service:latest
-    - docker push marktropin/api-gateway:latest
-    - docker push marktropin/regulatory-service:latest
-    - docker push marktropin/valuation-service:latest
-    - docker push marktropin/instrument-service:latest
-    - docker push marktropin/counterparty-service:latest
+    - docker tag unige/api-gateway tropin98/api-gateway:latest
+    - docker tag unige/regulatory-service tropin98/regulatory-service:latest
+    - docker tag unige/valuation-service tropin98/valuation-service:latest
+    - docker tag unige/instrument-service tropin98/instrument-service:latest
+    - docker tag unige/counterparty-service tropin98/counterparty-service:latest
+    - docker push tropin98/api-gateway:latest
+    - docker push tropin98/regulatory-service:latest
+    - docker push tropin98/valuation-service:latest
+    - docker push tropin98/instrument-service:latest
+    - docker push tropin98/counterparty-service:latest
     - mvn sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2 -Dsonar.organization=pinfo-2020
       -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=68db16192c9f0533a0926c86cf71c30b2331c97c
   - stage: Build
@@ -44,16 +44,22 @@ jobs:
     - npm run-script build --prod
     - docker build -t unige/web-ui .
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker tag unige/web-ui marktropin/web-ui:latest
-    - docker push marktropin/web-ui:latest
+    - docker tag unige/web-ui tropin98/web-ui:latest
+    - docker push tropin98/web-ui:latest
+
 addons:
+
   sonarcloud:
-    organization: pinfo-2020
+
+    organization: "pinfo-2020"
+
     token:
-		secure: "W9jtjH7IBt0uvMwjL+B63Zw0dEgAMFn6sbo9fjUksgRKSW/IFvRgHk3YtFITnoy6NxG9ytPmPgQtllQEZVCjNsw9xkXpgVZucttiTrdM31bkMFAsyTKjpbix5ddRbLGjl9LewkuHtqJEKex8jRUnZ9tNIrxHhWgCdAiecJhKv5Zt94rfiYwqcXCkEjUWO0dgDVcxk5nQzYpthhpZ1TqgyUxLa3NBJEq8wOZL9/tB3yhLDrfp9/+SP/tV8czbPw+Pn78kHJu5SMs4U7EGZ5bXGKeRujMYtpg+b/6OzQYOqOxB/evyReRkvP3sXGJ4na16MssRS+jBbT7qAibNjPB54Xq3rBq1VZPSDVl8gT5Lr0eJTuxmz/cc0JvpZgE+Owp3c7brLauLL8jQT3NeVXqXc8bkPM13qA36G6Uc4WN+ex9bl6zKI8NA7R4xBaKS1yWmjTAXMM4iaVrWLERXw6cms8Ig1zImbxR9MvXQkaSQS6Tgrf1N7wfiejVXAzLLl4wXq9pcJisktI1dbis84IkuC6RAUbq+Y2VUo/ciJRrQJ4aP16oTi8z7ZlXd6iee/AnUdn0+OwV9QTZhRY+W3uG4Tf87EEqZ6qeUjoTi9Rw99td0rVNuwEnZYoQDmpIjh7mFazdiJn3IFtGgpyoisWJlAmWiWdVZemxwkTjZxc4xNyw="
+
+		secure: "iTNU0hd7cHZ7S4XrvkIy1Bm9iHBu2LF06LVFmmfoXH1ZMmEH01xxFJBEOpmqdRt/G4D5lXxFnlaTpnL6r7h85qim/8zTfQprM689wR3CSTjhk3EhWoYs6tyRcYrXGZK79UZWxrxvSn08ShwKXkIKUB9WZXSyBVTOea9pj3+4AryLLpCxPrsIcbh/fSBxX4UUUDuYDiYpzeQLWYq0WssVAWK0gXsVEfP90Xqpj2dJkddbZ9VkdTyX0cYTm0BtzdhdRCRWeCMxRjzMxStbnv38B1l6kivKO08hCZG9S6eyZiHKno016TLoELqsy39b1tAKht3h6+vvjMt9oCRty6Aw7CzXpwzRnZox+iZrb4e4WLQAZ2iVzzoGIzlZaJZBFeqmG2jkRT9qwM6kSumoj/o8wlrKH4hYd7BPM0jdNMT2s6w6lHZ8S6pz1aFQUirFHoi0nZbRVsuGP50AJox1ETu5amxIHPP+fmpVrMS2l/GaBwXshwglzGyBKvldKPDPdLndvP/BzTYE9hJv6Dnn2pC+k4xIkNxJp8lzhZv6SCJ1Pqn2FSpXZYrqGQAo6Wo0pVpHZxcKcP4uCQ/BP1kjY0+0mbfp2S2xr0UKMOhuD6yMuDDXqAI9mbsivitNhfmxbbKDo/7qIsBLx2aS3galk958W/ntmSCHysshbh6VB8dog/M="
+
+
 script:
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
 
-dist: trusty
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
 
-secure: "iTNU0hd7cHZ7S4XrvkIy1Bm9iHBu2LF06LVFmmfoXH1ZMmEH01xxFJBEOpmqdRt/G4D5lXxFnlaTpnL6r7h85qim/8zTfQprM689wR3CSTjhk3EhWoYs6tyRcYrXGZK79UZWxrxvSn08ShwKXkIKUB9WZXSyBVTOea9pj3+4AryLLpCxPrsIcbh/fSBxX4UUUDuYDiYpzeQLWYq0WssVAWK0gXsVEfP90Xqpj2dJkddbZ9VkdTyX0cYTm0BtzdhdRCRWeCMxRjzMxStbnv38B1l6kivKO08hCZG9S6eyZiHKno016TLoELqsy39b1tAKht3h6+vvjMt9oCRty6Aw7CzXpwzRnZox+iZrb4e4WLQAZ2iVzzoGIzlZaJZBFeqmG2jkRT9qwM6kSumoj/o8wlrKH4hYd7BPM0jdNMT2s6w6lHZ8S6pz1aFQUirFHoi0nZbRVsuGP50AJox1ETu5amxIHPP+fmpVrMS2l/GaBwXshwglzGyBKvldKPDPdLndvP/BzTYE9hJv6Dnn2pC+k4xIkNxJp8lzhZv6SCJ1Pqn2FSpXZYrqGQAo6Wo0pVpHZxcKcP4uCQ/BP1kjY0+0mbfp2S2xr0UKMOhuD6yMuDDXqAI9mbsivitNhfmxbbKDo/7qIsBLx2aS3galk958W/ntmSCHysshbh6VB8dog/M="
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
