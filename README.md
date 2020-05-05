@@ -1,4 +1,4 @@
-# Kernel 2.0
+# FridgeToPlate
 
 Repository for PInfo-2020's team 2
 
