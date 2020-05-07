@@ -11,30 +11,30 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class InstrumentConsumerTest {
+class UserConsumerTest {
 
 	@Mock
-	private InstrumentProducer producer;
+	private UserProducer producer;
 	
 	@InjectMocks
-	private InstrumentConsumer consumer;
+	private UserConsumer consumer;
 	
 	@Test
-	void testUpdateRegularInstrument() {
-		consumer.updateInstrument("452");
+	void testUpdateRegularUser() {
+		consumer.updateUser("452");
 		verify(producer).send(452l);
 	}
 	
 	@Test
-	void testUpdateAllInstrument() {
-		consumer.updateInstrument("all");
-		verify(producer, times(1)).sendAllInstruments();
+	void testUpdateAllUser() {
+		consumer.updateUser("all");
+		verify(producer, times(1)).sendAllUsers();
 	}
 	
 	@Test
 	void testUpdateUnexpectedMessage() {
 		assertThrows(IllegalArgumentException.class,
-				() -> consumer.updateInstrument("XXX"));
+				() -> consumer.updateUser("XXX"));
 	}
 
 }

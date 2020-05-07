@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 
-public class InstrumentRestServiceIT {
+public class UserRestServiceIT {
 
 	@BeforeAll
 	public static void setup() {
-		RestAssured.baseURI = "http://localhost:28080/instrument";
+		RestAssured.baseURI = "http://localhost:28080/user";
 		RestAssured.port = 8080;
 	}
 
