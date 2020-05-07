@@ -42,6 +42,8 @@
 		<module>valuation-service</module>
 		<module>regulatory-service</module>
 		<module>api-gateway</module>
+		<!-- Custom services -->
+		<module>user-service</module>
 	</modules>
 
 
