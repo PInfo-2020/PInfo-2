@@ -27,7 +27,7 @@ public abstract class User {
 	@Id
 	@Column(name="userId", insertable=false, updatable=false)
 	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
 	private Long userId;
 
 	@NotNull
