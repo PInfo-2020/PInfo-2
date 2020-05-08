@@ -47,6 +47,11 @@ jobs:
     - docker tag unige/web-ui tropin98/web-ui:latest
     - docker push tropin98/web-ui:latest
 
+addons:
+  sonarcloud:
+    organization: "pinfo-2020"
+    token:
+      secure: "uUEnFZxRinQmBeZH84KpgxLDJoUPKgHFxUVy+NubXWEHtWF00Rae1g14tGB6Np2MiREYaWK/10OKEq0vdO/mpyCBiZy/g9ufXWeRWbakzZJyTMV+kZI+OxqMF9Xc2qnHXwq9PUcnqP/abCv0zyLeT9TrORVb0iBmTsp0SGOvAUK4Ld+wNZ/LT9/8UeryNTlGiIH4xFDZnPATQxtbUxGvkyF4wukB3JXm8BGD6MhVYnr5CR20o9GxD9oAVx8E4fBua+9S74be2U/uLURGeS5xWTjCCC/Ie0H9yFASzxd2iygxFzLRwVOe3MpeNoaOohiXN016nkmPn0QxrnCuNcEOVKS4uvXBMZKlI59+Vw6VgKac1bCXrKcpcugPRj87De+xP4XTAN9l+zc3S+MosQdRj0j96DTG+bwxiKLk+8pbTFCyvFnd562aNutBCymc+cc7WeHz54H/kxXsDeczwQdUYVFM4K3rTP5bQJf9h3LPv+170Z9XPv3bfuH1EAlsYlY9TjBNoq8s1Go1Ans/sG/3+dIYfjTshwc+XytPrzputwq9AYAJBw6L+7yuxa1bDDUe4VFcbp+phmPlTFZvrtsiAdfZmolN1/ppEyFFvzUqxAohjO6zVOGn8wr5B0W8V/2+BfxVHAorcukMb4XUccNOjTeLmIgAD8NNnFpJbbimbF0="
 
 script:
 
