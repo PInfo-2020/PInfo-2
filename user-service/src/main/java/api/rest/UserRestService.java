@@ -12,9 +12,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import api.msg.userProducer;
+import api.msg.UserProducer;
 import domain.model.User;
-import domain.service.userService;
+import domain.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -27,9 +27,9 @@ import io.swagger.annotations.Authorization;
 public class UserRestService {
 
 	@Inject
-	private userService userService;
+	private UserService userService;
 	@Inject
-	private userProducer userProducer;
+	private UserProducer userProducer;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

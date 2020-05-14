@@ -19,7 +19,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import domain.model.Bond;
 import domain.model.User;
 import eu.drus.jpa.unit.api.JpaUnit;
 
