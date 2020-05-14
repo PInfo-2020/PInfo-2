@@ -36,13 +36,14 @@ public abstract class User {
 	@NotNull
 	private String email;
 
-	@NotNull
-	private List<Recipe> favoriteRecipes;
+	//@NotNull
+	//private List<Recipe> favoriteRecipes;
 
 	@NotNull
 	private Date registerDate;
 
-	@NotNull
-	private float userRating;
+	private float ratingNum;
+
+	private float ratingDenum;
 
 }
