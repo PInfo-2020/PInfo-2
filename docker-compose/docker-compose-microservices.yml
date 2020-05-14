@@ -122,6 +122,47 @@ services:
        - kafka
        - instrument-database
 
+  user-database:
+    image: postgres:10
+    container_name: user-database
+    hostname: user-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: user
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user", "-d", "user"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-inst:/var/lib/postgresql/data
+      - ./test-data/user.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    
+  user-service:
+    container_name: user-service    
+    image: unige/user-service:latest
+    hostname: user-service
+    networks:
+      - backend-network
+    ports:
+      - "11080:29080"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9192"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/user"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_DRIVER_DASH_NAME: 'postgresql'   
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_USER_DASH_NAME: 'user'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_PASSWORD: 'user'      
+    depends_on:
+       - kafka
+       - user-database
+
   valuation-service:
     container_name: valuation-service    
     image: unige/valuation-service:latest
