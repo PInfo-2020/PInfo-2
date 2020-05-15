@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @DiscriminatorColumn(name = "id")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
 //@ApiModel(subTypes = {Bond.class, Stock.class, Deposit.class, Loan.class, Warrant.class}, discriminator = "userType")
 public abstract class User {
