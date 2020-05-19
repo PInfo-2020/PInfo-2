@@ -44,6 +44,7 @@
 		<module>api-gateway</module>
 		<!-- Custom services -->
 		<module>user-service</module>
+		<module>ingredient-service</module>
 	</modules>
 
 
