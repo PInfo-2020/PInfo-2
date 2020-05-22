@@ -24,7 +24,7 @@ public class IngredientServiceImpl implements IngredientService {
 	public List<Ingredient> getAll() {
 		log.info("retrieve all products(ingredients)");
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Ingredient> criteria = builder.createQuery( Ingredient.class );
+		CriteriaQuery<Ingredient> criteria = builder.createQuery(Ingredient.class);
 		criteria.from(Ingredient.class);
 		return em.createQuery( criteria ).getResultList();
 	}
@@ -33,7 +33,7 @@ public class IngredientServiceImpl implements IngredientService {
 	public List<Ingredient> getByType(String productType){
 		log.info("retrieve products of requested type");
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Ingredient> criteria = builder.createQuery( Ingredient.class );
+		CriteriaQuery<Ingredient> criteria = builder.createQuery(Ingredient.class);
 		Root<Ingredient> c = criteria.from(Ingredient.class);
 		ParameterExpression<String> p = builder.parameter(String.class);
 		criteria.select(c).where(builder.like(c.get("productType"), p));

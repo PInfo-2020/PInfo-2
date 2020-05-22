@@ -38,7 +38,10 @@ class IngredientServiceImplTest {
 	@Test
 	void testGetAll() {
 		int size = initDataStore();
+
 		assertEquals(size, ingredientService.getAll().size());
+		System.out.printf("Size: %d", size);
+		//assertEquals(ingredientService.getAll().size(), 5);
 	}
 
 	private int initDataStore() {
