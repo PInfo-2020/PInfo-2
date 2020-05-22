@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(User user) {
-		User i = em.find(User.class, user.getId());
+		User i = em.find(User.class, user.getUserId());
 		if (i == null) {
-			throw new IllegalArgumentException("User does not exist : " + user.getId());
+			throw new IllegalArgumentException("User does not exist : " + user.getUserId());
 		}
 		em.merge(user);
 	}
@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void create(User user) {
-		if ( /*user.getId() != null or*/ get(user.getId())!=null ) {
-			throw new IllegalArgumentException("User already exists : " + user.getId());
+		if ( /*user.getId() != null or*/ get(user.getUserId())!=null ) {
+			throw new IllegalArgumentException("User already exists : " + user.getUserId());
 		}
 		em.persist(user);
 	}

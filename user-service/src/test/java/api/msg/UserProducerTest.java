@@ -52,16 +52,16 @@ class UserProducerTest {
 	@Test
 	void testSendLong() {
 		User user = getRandomUser();
-		when(userService.get(user.getId())).thenReturn(user);
-		producer.send(user.getId());
+		when(userService.get(user.getUserId())).thenReturn(user);
+		producer.send(user.getUserId());
 		verify(kafkaProducer, times(1)).send("users", user);
 	}
 
 	@Test
 	void testSendLongNull() {
 		User user = getRandomUser();
-		when(userService.get(user.getId())).thenReturn(null);
-		producer.send(user.getId());
+		when(userService.get(user.getUserId())).thenReturn(null);
+		producer.send(user.getUserId());
 		verify(kafkaProducer, times(0)).send("users", user);
 	}
 

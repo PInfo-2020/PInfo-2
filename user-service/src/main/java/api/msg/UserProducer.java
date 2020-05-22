@@ -30,7 +30,7 @@ public class UserProducer {
 	}
 
 	public void send(User user) {
-		log.info("Send the state of an user to the topic with id " + user.getId() );
+		log.info("Send the state of an user to the topic with id " + user.getUserId() );
 		producer.send("user", user);			
 	}
 
