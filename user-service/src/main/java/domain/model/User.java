@@ -18,31 +18,32 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorColumn(name = "userId")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "id")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
 //@ApiModel(subTypes = {Bond.class, Stock.class, Deposit.class, Loan.class, Warrant.class}, discriminator = "userType")
 public abstract class User {
 
 	@Id
-	@Column(name="userId", insertable=false, updatable=false)
+	@Column(name="id", insertable=false, updatable=false)
 	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-	private Long userId;
+	private Long id;
 
 	@NotNull
-	private String userName;
+	private String name;
 
 	@NotNull
 	private String email;
 
-	/*@NotNull
-	private List<Recipe> favoriteRecipes;
+	//@NotNull
+	//private List<Recipe> favoriteRecipes;
 
 	@NotNull
 	private Date registerDate;
 
-	@NotNull
-	private float userRating;*/
+	private float ratingNum;
+
+	private float ratingDenum;
 
 }
