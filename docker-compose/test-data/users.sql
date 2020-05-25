@@ -1,4 +1,4 @@
-CREATE USER user WITH PASSWORD 'user';
+CREATE USER usr WITH PASSWORD 'usr';
 drop table User if exists;
 drop sequence if exists USER_SEQ;
 create sequence USER_SEQ start with 1 increment by 20;
@@ -11,8 +11,8 @@ create table User (
         ratingDenum int,
         primary key (id)
 );
-GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public to user;
-GRANT SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public to user;
-TRUNCATE TABLE INSTRUMENT;
-INSERT INTO User (id, name, email, registerDate, ratingNum, ratingDenum) values ( INSTRUMENT_SEQ.nextval, 'Bob', 'bob.samplomb@gmail.com', PARSEDATETIME('17-09-2017','yyyy-dd-mm','en'), 45, 77 );
-INSERT INTO User (id, name, email, registerDate, ratingNum, ratingDenum) values ( INSTRUMENT_SEQ.nextval, 'Bob', 'invalid@mailLOL', PARSEDATETIME('03-04-2019','yyyy-dd-mm','en'), 99, 121 );
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public to usr;
+GRANT SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public to usr;
+TRUNCATE TABLE User;
+INSERT INTO User (id, name, email, registerDate, ratingNum, ratingDenum) values ( USER_SEQ.nextval, 'Bob', 'bob.samplomb@gmail.com', PARSEDATETIME('17-09-2017','yyyy-dd-mm','en'), 45, 77 );
+INSERT INTO User (id, name, email, registerDate, ratingNum, ratingDenum) values ( USER_SEQ.nextval, 'Bob', 'invalid@mailLOL', PARSEDATETIME('03-04-2019','yyyy-dd-mm','en'), 99, 121 );
