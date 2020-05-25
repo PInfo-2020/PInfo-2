@@ -1,6 +1,6 @@
 package domain.model;
 
-import java.util.Date;
+import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -37,7 +37,7 @@ public abstract class User {
 	private String email;
 
 	@NotNull
-	private List<Recipe> favoriteRecipes;
+	private ArrayList<String> favoriteRecipes; // placeholder, 'Recipe' not ready yet
 
 	@NotNull
 	private Date registerDate;
