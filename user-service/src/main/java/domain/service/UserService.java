@@ -2,15 +2,15 @@ package domain.service;
 
 import java.util.List;
 
-import domain.model.User;
+import domain.model.AUser;
 
 public interface UserService {
 
-	List<User> getAll();
+	List<AUser> getAll();
 
-	void update(User user);
+	void update(AUser user);
 
-	void create(User user);
+	void create(AUser user);
 
-	User get(Long userId);
+	AUser get(Long userId);
 }

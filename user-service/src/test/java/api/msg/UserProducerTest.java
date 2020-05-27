@@ -19,14 +19,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import domain.model.User;
+import domain.model.AUser;
 import domain.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 class UserProducerTest {
 
 	@Mock
-	private SimpleKafkaProducer<String, User> kafkaProducer;
+	private SimpleKafkaProducer<String, AUser> kafkaProducer;
 	@Mock
 	private UserService userService;
 
@@ -34,23 +34,23 @@ class UserProducerTest {
 	private UserProducer producer;
 
 	@Test
-	void testSendAllUsers() {
-		List<User> users = getRandomUserCollection();
+	void testSendAllAUsers() {
+		List<AUser> users = getRandomAUserCollection();
 		when(userService.getAll()).thenReturn(users);
-		producer.sendAllUsers();
-		verify(kafkaProducer, times(users.size())).send(eq("users"), any(User.class));
+		producer.sendAllAUsers();
+		verify(kafkaProducer, times(users.size())).send(eq("users"), any(AUser.class));
 	}
 
 	@Test
-	void testSendUser() {
-		User user = getRandomUser();
+	void testSendAUser() {
+		AUser user = getRandomAUser();
 		producer.send(user);
 		verify(kafkaProducer, times(1)).send("users", user);
 	}
 
 	@Test
 	void testSendLong() {
-		User user = getRandomUser();
+		AUser user = getRandomAUser();
 		when(userService.get(user.getId())).thenReturn(user);
 		producer.send(user.getId());
 		verify(kafkaProducer, times(1)).send("users", user);
@@ -58,22 +58,22 @@ class UserProducerTest {
 
 	@Test
 	void testSendLongNull() {
-		User user = getRandomUser();
+		AUser user = getRandomAUser();
 		when(userService.get(user.getId())).thenReturn(null);
 		producer.send(user.getId());
 		verify(kafkaProducer, times(0)).send("users", user);
 	}
 
-	private List<User> getRandomUserCollection() {
-		List<User> users = new ArrayList<>();
-		long numberOfUser = Math.round((Math.random() * 1000));
-		for (int i = 0; i < numberOfUser; i++) {
-			users.add(getRandomUser());
+	private List<AUser> getRandomAUserCollection() {
+		List<AUser> users = new ArrayList<>();
+		long numberOfAUser = Math.round((Math.random() * 1000));
+		for (int i = 0; i < numberOfAUser; i++) {
+			users.add(getRandomAUser());
 		}
 		return users;
 	}
 
-	private User getRandomUser() {
+	private AUser getRandomAUser() {
 		Bond b = new Bond();
 		b.setBrokerLei(UUID.randomUUID().toString());
 		b.setCounterpartyLei(UUID.randomUUID().toString());

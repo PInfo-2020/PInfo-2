@@ -52,9 +52,9 @@ services:
     environment:
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: usr
-      POSTGRES_DB: user
+      POSTGRES_DB: auser
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "usr", "-d", "user"]
+      test: ["CMD", "pg_isready", "-U", "usr", "-d", "auser"]
       interval: 30s
       timeout: 30s
       retries: 3
@@ -72,11 +72,11 @@ services:
     networks:
       - backend-network
     ports:
-      - "11081:29080"
+      - "11081:28080"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
-      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9192"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/user"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/auser"
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_DRIVER_DASH_NAME: 'postgresql'
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_USER_DASH_NAME: 'usr'
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_PASSWORD: 'usr'

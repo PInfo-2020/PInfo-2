@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="UserPU"
+	<persistence-unit name="AUserPU"
 		transaction-type="JTA">
-		<jta-data-source>java:jboss/datasources/userds</jta-data-source>
+		<jta-data-source>java:jboss/datasources/auserds</jta-data-source>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />
@@ -13,8 +13,8 @@
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.id.new_generator_mappings" value="true" />
-			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>	
-			<property name="javax.persistence.sql-load-script-source" value="META-INF/users_test_data.sql"/>
+			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
+			<property name="javax.persistence.sql-load-script-source" value="META-INF/users.sql"/>
 		</properties>
 	</persistence-unit>
 </persistence>

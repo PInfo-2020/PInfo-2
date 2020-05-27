@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import api.msg.UserProducer;
-import domain.model.User;
+import domain.model.AUser;
 import domain.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,50 +30,50 @@ public class UserRestService {
 	private UserService userService;
 	@Inject
 	private UserProducer userProducer;
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Get all the Users",
-    notes = "Users are specialized and thus might contain more fields than the one of the base class.")
-	public List<User> getAll() {
+	@ApiOperation(value = "Get all the AUsers",
+    notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
+	public List<AUser> getAll() {
 		return userService.getAll();
 	}
 
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Get a specifc User",
-    notes = "Users are specialized and thus might contain more fields than the one of the base class.")
-	public User get(@PathParam("id") Long userId) {
+	@ApiOperation(value = "Get a specifc AUser",
+    notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
+	public AUser get(@PathParam("id") Long userId) {
 		return userService.get(userId);
 	}
-	
-	
+
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Update a given User",
-    notes = "Users are specialized and thus might contain more fields than the one of the base class.")
-	public void upadte(User user) {
+	@ApiOperation(value = "Update a given AUser",
+    notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
+	public void upadte(AUser user) {
 		userService.update(user);
 		userProducer.send(user);
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Create a new User",
-    notes = "Users are specialized and thus might contain more fields than the one of the base class.")
-	public void create(User user) {
+	@ApiOperation(value = "Create a new AUser",
+    notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
+	public void create(AUser user) {
 		userService.create(user);
 		userProducer.send(user);
 	}
 
-	
+
 	@POST
-	@Path("propagateAllUsers")
+	@Path("propagateAllAUsers")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Propagate all Users to the bus to sync up downstream services",
-    notes = "Users are specialized and thus might contain more fields than the one of the base class.")
-	public void propagateAllUsers() {
-		userProducer.sendAllUsers();
+	@ApiOperation(value = "Propagate all AUsers to the bus to sync up downstream services",
+    notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
+	public void propagateAllAUsers() {
+		userProducer.sendAllAUsers();
 	}
 }

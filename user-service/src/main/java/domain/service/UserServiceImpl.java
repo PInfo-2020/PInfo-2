@@ -3,53 +3,55 @@ package domain.service;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import lombok.extern.java.Log;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import domain.model.User;
+import domain.model.AUser;
 
 @ApplicationScoped
+@Log
 public class UserServiceImpl implements UserService {
 
-	@PersistenceContext(unitName = "UserPU")
+	@PersistenceContext(unitName = "AUserPU")
 	private EntityManager em;
 
-	public UserServiceImpl() {
+	/*public UserServiceImpl() {
 	}
 
 	public UserServiceImpl(EntityManager em) {
 		this();
 		this.em = em;
-	}
+	}*/
 
 	@Override
-	public List<User> getAll() {
+	public List<AUser> getAll() {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<User> criteria = builder.createQuery(User.class);
-		criteria.from(User.class);
+		CriteriaQuery<AUser> criteria = builder.createQuery(AUser.class);
+		criteria.from(AUser.class);
 		return em.createQuery(criteria).getResultList();
 	}
 
 	@Override
-	public void update(User user) {
-		User i = em.find(User.class, user.getId());
+	public void update(AUser user) {
+		AUser i = em.find(AUser.class, user.getId());
 		if (i == null) {
-			throw new IllegalArgumentException("User does not exist : " + user.getId());
+			throw new IllegalArgumentException("AUser does not exist : " + user.getId());
 		}
 		em.merge(user);
 	}
 
 	@Override
-	public User get(Long userId) {
-		return em.find(User.class, userId);
+	public AUser get(Long userId) {
+		return em.find(AUser.class, userId);
 	}
 
 	@Override
-	public void create(User user) {
+	public void create(AUser user) {
 		if ( /*user.getId() != null or*/ get(user.getId())!=null ) {
-			throw new IllegalArgumentException("User already exists : " + user.getId());
+			throw new IllegalArgumentException("AUser already exists : " + user.getId());
 		}
 		em.persist(user);
 	}

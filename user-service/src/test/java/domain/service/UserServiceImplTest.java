@@ -19,7 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import domain.model.User;
+import domain.model.AUser;
 import eu.drus.jpa.unit.api.JpaUnit;
 
 @ExtendWith(JpaUnit.class)
@@ -27,7 +27,7 @@ import eu.drus.jpa.unit.api.JpaUnit;
 class UserServiceImplTest {
 
 	@Spy
-	@PersistenceContext(unitName = "UserPUTest")
+	@PersistenceContext(unitName = "AUserPUTest")
 	EntityManager em;
 
 	@InjectMocks
@@ -35,21 +35,21 @@ class UserServiceImplTest {
 
 	@Test
 	void testGetAll() {
-		List<User> users = userService.getAll();
+		List<AUser> users = userService.getAll();
 		int size = users.size();
 		
-		userService.create(getRandomUser());
-		userService.create(getRandomUser());
-		userService.create(getRandomUser());
-		userService.create(getRandomUser());
+		userService.create(getRandomAUser());
+		userService.create(getRandomAUser());
+		userService.create(getRandomAUser());
+		userService.create(getRandomAUser());
 		
 		assertEquals(size + 4, userService.getAll().size());
 	}
 
 	@Test
 	void testUpdate() {
-		userService.create(getRandomUser());
-		User user = userService.getAll().get(0);
+		userService.create(getRandomAUser());
+		AUser user = userService.getAll().get(0);
 		assertNotNull(user);
 		Long id = user.getId();
 		user.setOriginalCurrency("XXX");
@@ -60,7 +60,7 @@ class UserServiceImplTest {
 
 	@Test
 	void testUpdateNonExistant() {
-		User i = new User() {
+		AUser i = new AUser() {
 			@Override
 			public Long getId() {
 				return Long.MAX_VALUE;
@@ -73,17 +73,17 @@ class UserServiceImplTest {
 
 	@Test
 	void testGet() {
-		userService.create(getRandomUser());
-		User user = userService.getAll().get(0);
+		userService.create(getRandomAUser());
+		AUser user = userService.getAll().get(0);
 		assertNotNull(user);
 		Long id = user.getId();
-		User getUser = userService.get(id);
-		assertEquals(user.getOriginalCurrency(), getUser.getOriginalCurrency());
+		AUser getAUser = userService.get(id);
+		assertEquals(user.getOriginalCurrency(), getAUser.getOriginalCurrency());
 	}
 
 	@Test
 	void testGetNonExistant() {
-		List<User> users = userService.getAll();
+		List<AUser> users = userService.getAll();
 		System.out.println("testGetNonExistant:" + users.size());
 
 		assertNull(userService.get(Long.MAX_VALUE));
@@ -91,7 +91,7 @@ class UserServiceImplTest {
 
 	@Test
 	void testCreate() {
-		User user = getRandomUser();
+		AUser user = getRandomAUser();
 		userService.create(user);
 		assertNotNull(user.getId());
 	}
@@ -99,14 +99,14 @@ class UserServiceImplTest {
 
 	@Test
 	void testCreateDuplicate() {
-		User user = getRandomUser();
+		AUser user = getRandomAUser();
 		userService.create(user);
 		assertThrows(IllegalArgumentException.class, () -> {
 			userService.create(user);
 		});
 	}
 
-	private User getRandomUser() {
+	private AUser getRandomAUser() {
 		Bond b = new Bond();
 		b.setBrokerLei(UUID.randomUUID().toString());
 		b.setCounterpartyLei(UUID.randomUUID().toString());
