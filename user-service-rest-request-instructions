@@ -1,0 +1,12 @@
+
+>Add to header : Content-Type: application/json
+>Chech header content-length high enough, ex : Content-Length: 348
+
+> content ex :
+{
+"name":"test",
+"email":"test@testmail.com",
+"registerDate":"2017-17-09",
+"ratingNum":"42",
+"ratingDenum":"66"
+}
