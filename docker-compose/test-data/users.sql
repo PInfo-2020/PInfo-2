@@ -7,8 +7,8 @@ create table AUser (
         name varchar(255) not null,
         email varchar(255) not null,
         registerDate date not null,
-        ratingNum int,
-        ratingDenum int,
+        ratingNum int not null,
+        ratingDenum int not null,
         primary key (id)
 );
 GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public to usr;

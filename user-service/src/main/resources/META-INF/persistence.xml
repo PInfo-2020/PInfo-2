@@ -11,10 +11,10 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.H2Dialect" />
+				value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.id.new_generator_mappings" value="true" />
 			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
-			<property name="javax.persistence.sql-load-script-source" value="META-INF/users.sql"/>
+			<!--<property name="javax.persistence.sql-load-script-source" value="META-INF/users.sql"/>-->
 		</properties>
 	</persistence-unit>
 </persistence>

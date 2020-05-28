@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
 import api.msg.UserProducer;
@@ -59,12 +60,16 @@ public class UserRestService {
 	}
 
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("post")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Create a new AUser",
     notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
 	public void create(AUser user) {
+		System.out.println(user);
 		userService.create(user);
-		userProducer.send(user);
+		//userProducer.send(user);
+		System.out.println("After");
+		System.out.println(user);
 	}
 
 

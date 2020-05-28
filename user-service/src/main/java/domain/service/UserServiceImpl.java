@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 import domain.model.AUser;
 
@@ -49,10 +50,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void create(AUser user) {
-		if ( /*user.getId() != null or*/ get(user.getId())!=null ) {
+		/*if ( user.getId() != null or get(user.getId())!=null ) {
 			throw new IllegalArgumentException("AUser already exists : " + user.getId());
-		}
+		}*/
 		em.persist(user);
+		
 	}
 }

@@ -22,9 +22,10 @@ import lombok.Data;
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
 //@ApiModel(subTypes = {Bond.class, Stock.class, Deposit.class, Loan.class, Warrant.class}, discriminator = "userType")
-public abstract class AUser {
+public class AUser {
 
 	@Id
+	@NotNull
 	//@Column(name="id", insertable=false, updatable=false)
 	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")

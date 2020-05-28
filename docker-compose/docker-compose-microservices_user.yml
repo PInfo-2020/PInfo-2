@@ -59,7 +59,7 @@ services:
       timeout: 30s
       retries: 3
     volumes:
-      - pgdata-inst:/var/lib/postgresql/data
+      - pgdata-usr:/var/lib/postgresql/data
       - ./test-data/users.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     stdin_open: true
@@ -76,17 +76,16 @@ services:
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/auser"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_DRIVER_DASH_NAME: 'postgresql'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_USER_DASH_NAME: 'usr'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_PASSWORD: 'usr'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/auser"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_DRIVER_DASH_NAME: 'postgresql'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: 'usr'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: 'usr'
     depends_on:
        - kafka
        - user-database
 
 volumes:
-   pgdata-cpty:
-   pgdata-inst:
+   pgdata-usr:
 
 
 networks:
