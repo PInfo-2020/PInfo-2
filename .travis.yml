@@ -1,5 +1,6 @@
 language: java
 
+# Set current branch to DAVID-TEST
 branches:
   only:
     - david-test
@@ -22,7 +23,7 @@ jobs:
   - stage: Prepare
     script:
     - nvm install $NODE_VERSION
-    - mvn install -N -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+    - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
   - stage: Build
     script:
     - mvn install -Ppackage-docker-image
