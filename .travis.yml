@@ -5,6 +5,9 @@ branches:
   only:
     - david-test
 
+# Don't use the Maven default command
+install: /bin/true
+
 env:
   matrix:
   - NODE_VERSION="12.13.1"
