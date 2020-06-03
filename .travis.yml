@@ -19,6 +19,10 @@ cache:
   - "$HOME/.m2"
   - node_modules
 jobs:
+  exclude:
+  - stage: Prepare
+    script:
+    - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   include:
   - stage: Prepare
     script:
