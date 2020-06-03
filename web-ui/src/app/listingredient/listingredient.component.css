@@ -1,0 +1,19 @@
+input[type=text] {
+  border: 1px line #999;
+  border-radius: 150;
+
+  -webkit-appearance: none;
+
+  width: 450px;
+
+ -align: center;
+
+ margin-left: auto;
+  margin-right: auto;
+}
+
+
+table, th, td {
+  border: 1px solid black;
+}
+

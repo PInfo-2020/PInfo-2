@@ -1,0 +1,73 @@
+<p>&nbsp;</p>
+
+<div *ngIf="iseditable === true"><!---If it is editable.-->
+  <p style="text-align: center;">Nom de l'ingrédient:<br />
+    <input type="text" class="form-control" [(ngModel)]="name">
+
+    <br />Image de l'ingrédient:<br />
+    <input type="text" class="form-control" [(ngModel)]="image">
+
+    <br />
+
+  Quantité:
+    <br /> <input type="text" class="form-control" [(ngModel)]="quantity">
+
+    <br />Nombre<br />
+    <input type="text" class="form-control" [(ngModel)]="unit">
+  </p>
+
+<p>&nbsp;</p>
+
+
+    <button  style="align: center;" class="btn button-success" (click)="addButton()">Ajouter un ingrédient.</button>
+  </div>
+
+
+<p>&nbsp;</p>
+
+<!--
+<table>
+  <tr *ngFor="let ingredient of listingredient;let position=index;">
+    <td><img [src]="ingredient.image" style="width:80px"></td>
+    <td><a href="google.com">{{ ingredient.name }}</a>  </td>
+    <td>{{ingredient.quantity}}</td>
+    <td>{{ ingredient.unit }}X</td>
+    <td *ngIf="modeadd === true"><button class="btn button-success" (click)="addIngredient(position,ingredient)">Ajouter à mes ingrédients</button></td>
+    <td *ngIf="iseditable === true"><button class="btn button-success" (click)="deleteButton(position,ingredient)">Supprimer</button></td>
+
+  </tr>
+</table> -->
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Vos Ingrédients</h2>
+    <div class="list-group">
+      <button
+        class="list-group-item"
+        *ngFor="let ingredient of listingredient; let i = index">
+        <!--(click)="onViewBook(i)"-->
+        <h3 class="list-group-item-heading">
+	<img [src]="ingredient.image" style="width:80px">
+
+          <a href="google.com">{{ ingredient.name }}</a>, 
+	 <h5>{{ingredient.quantity }},{{ingredient.unit }} X</h5>
+
+          <button class="btn btn-default pull-right"> <!--(click)="deleteButton(position,ingredient)"-->
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
+
+  	<button class="btn button-success" (click)="addIngredient(i,ingredient)">Ajouter à mes ingrédients</button>
+
+	<button class="btn button-success" (click)="deleteButton(i,ingredient)">Supprimer</button>
+
+     </h3>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
