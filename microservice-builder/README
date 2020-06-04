@@ -1,0 +1,14 @@
+This python script tries to create a valid microservice structure and docker files
+
+
+Aliases :
+__template__           : the name used for the service. ex: 'instrument', 'ingredient', 'user', ..
+__template_class__     : the name used for the main class. ex: 'Instrument', 'Ingredient', 'AUser', ..
+__template_class_UC__  : derivated from __template_class__ (uppercase)
+__template_instance__  : the name used for instances of the main class and a few methods manipulating them. ex: 'inst', 'ingredient', 'user', ..
+__db_name__            : derivated from __template_class__ (lowercase)
+__db_username__        : user name for database table
+__db_userpw__          : user password for database table
+__port__               : the unique port on which the service listens (internal)
+__port_ext__           : the unique port on which the service listens (external)
+__port_offset__        : the offset from port 8080, derivated from __port__ (-8080)
