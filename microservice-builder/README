@@ -1,4 +1,32 @@
-This python script tries to create a valid microservice structure and docker files
+This python script tries to create a valid microservice structure, docker files and convenience scripts.
+
+This script is still in alpha, so use it carefully !
+
+You need python3 installed for it to work.
+
+usage : $ ./builder.py
+
+It will ask you for parameters. In case of doubt, refer to the examples it provides.
+
+Please note that after creating the service you still have to :
+ - copy docker-compose/*.* files to your actual docker-compose/ directory
+ - manually add the lines from docker-compose/clean.sh to the same file in your actual docker-compose/clean.sh
+ - add the name of your service in the main pom.xml
+ - copy the convenience scripts (.sh files) to the root of PInfo-2 AND give them executable status with 'sudo chmod +x ./*.sh'
+ - create a .sql file in docker-compose/test-data, that creates the relation and optionally creates instances in it (don't forget to uncomment the line that loads this SQL file in docker-compose-* files)'
+
+
+Technical information :
+
+Tested with parameters :
+ '__db_name__': 'recipe',
+ '__db_username__': 'rcp',
+ '__db_userpw__': 'rcp',
+ '__port__': 27777,
+ '__port_ext__': 15555,
+ '__template__': 'recipe',
+ '__template_class__': 'Recipe',
+ '__template_instance__': 'recipe'
 
 
 Aliases :
