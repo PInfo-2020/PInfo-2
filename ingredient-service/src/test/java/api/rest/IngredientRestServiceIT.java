@@ -26,6 +26,11 @@ public class IngredientRestServiceIT {
 	public void testGet() {
 		when().get("/Ail, cru").then().body(containsString("137"));
 	}
-	
+
+	@Test
+	public void testGetByType() {
+		when().get("/type/Viande").then().body(containsString("155"));
+	}
+
 
 }

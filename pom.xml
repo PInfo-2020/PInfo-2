@@ -12,9 +12,9 @@
 	<packaging>pom</packaging>
 
 	<scm>
-		<url>https://github.com/hostettler/microservices</url>
-		<connection>scm:git:git@github.com/hostettler/microservices.git</connection>
-		<developerConnection>scm:git:git@github.com/hostettler/microservices</developerConnection>
+		<url>https://github.com/PInfo-2020/PInfo-2</url>
+		<connection>scm:git:git@github.com/PInfo-2020/PInfo-2.git</connection>
+		<developerConnection>scm:git:git@github.com/PInfo-2020/PInfo-2</developerConnection>
 	</scm>
 
 	<properties>
@@ -46,6 +46,7 @@
 		<module>user-service</module>
 		<module>ingredient-service</module>
 	</modules>
+
 
 
 	<dependencyManagement>
@@ -152,6 +153,21 @@
 				<version>1.3</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.13.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.13.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-to-slf4j</artifactId>
+				<version>2.13.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -205,10 +221,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.1</version>
 					<configuration>
-						<configuration>
 							<source>${maven.compiler.source}</source>
 							<target>${maven.compiler.target}</target>
-						</configuration>
 					</configuration>
 				</plugin>
 				<plugin>

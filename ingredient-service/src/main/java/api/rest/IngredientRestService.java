@@ -1,13 +1,10 @@
-package api;
+package api.rest;
 
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import domain.model.Ingredient;
@@ -29,13 +26,20 @@ public class IngredientRestService {
 	}
 
 	@GET
-	@Path("{type}")
+	@Path("/search/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "retrieve all products of requested type")
+	@ApiOperation(value = "retrieve all products containing requested name")
+	public List<Ingredient> searchByName(@PathParam("name") String productType) {
+		return ingredientService.searchByName(productType);
+	}
+
+	@GET
+	@Path("/type/{type}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "retrieve all products containing requested type")
 	public List<Ingredient> getByType(@PathParam("type") String productType) {
 		return ingredientService.getByType(productType);
 	}
-
 
 	@GET
 	@Path("{name}")
@@ -43,6 +47,23 @@ public class IngredientRestService {
 	@ApiOperation(value = "Get a specific product using its name")
 	public Ingredient get(@PathParam("name") String productName) {
 		return ingredientService.get(productName);
+	}
+
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)  //charset=UTF-8
+	@ApiOperation(value = "Create a new product reference ")
+	public void create(Ingredient ingr) {
+		//System.out.println(ingr);
+		ingredientService.create(ingr);
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)  //charset=UTF-8
+	@ApiOperation(value = "update a product")
+	public void update(Ingredient product) {
+		System.out.println("After");
+		ingredientService.update(product);
 	}
 
 }
