@@ -20,21 +20,21 @@ class UserConsumerTest {
 	private UserConsumer consumer;
 	
 	@Test
-	void testUpdateRegularUser() {
-		consumer.updateUser("452");
+	void testUpdateRegularAUser() {
+		consumer.updateAUser("452");
 		verify(producer).send(452l);
 	}
 	
 	@Test
-	void testUpdateAllUser() {
-		consumer.updateUser("all");
-		verify(producer, times(1)).sendAllUsers();
+	void testUpdateAllAUser() {
+		consumer.updateAUser("all");
+		verify(producer, times(1)).sendAllAUsers();
 	}
 	
 	@Test
 	void testUpdateUnexpectedMessage() {
 		assertThrows(IllegalArgumentException.class,
-				() -> consumer.updateUser("XXX"));
+				() -> consumer.updateAUser("XXX"));
 	}
 
 }
