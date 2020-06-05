@@ -2,7 +2,7 @@
 import { of as observableOf,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-class User {
+class AUser{
   name: string;
   picture: string;
 }

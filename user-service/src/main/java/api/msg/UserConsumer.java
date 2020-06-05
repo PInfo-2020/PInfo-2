@@ -17,10 +17,10 @@ public class UserConsumer {
 	private UserProducer producer;
 
 	@Consumer(topics = "usersReq", groupId = "pinfo-microservices")
-	public void updateUser(final String message) {
+	public void updateAUser(final String message) {
 		log.info("Consumer got following message : " + message);
 		if ("all".equals(message)) {
-			producer.sendAllUsers();
+			producer.sendAllAUsers();
 		} else {
 			// interpret the user id
 			try {

@@ -1,0 +1,35 @@
+version: "3.5"
+
+services:
+
+
+
+  user-database:
+    image: postgres:10
+    container_name: user-database
+    hostname: user-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: usr
+      POSTGRES_DB: auser
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "usr", "-d", "auser"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-usr:/var/lib/postgresql/data
+      - ./test-data/users.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+volumes:
+   pgdata-usr:
+
+
+networks:
+  backend-network:
+    driver: bridge

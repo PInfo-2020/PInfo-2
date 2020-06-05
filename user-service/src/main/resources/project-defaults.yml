@@ -1,11 +1,11 @@
 thorntail:
   datasources:
     data-sources:
-      userds:
+      auserds:
         driver-name: myh2
         connection-url: jdbc:h2:mem:UserDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        user-name: sa
-        password: sa  
+        user-name: usr
+        password: usr
     jdbc-drivers:
       myh2:
         driver-class-name: org.h2.Driver
@@ -14,8 +14,11 @@ thorntail:
       postgresql:
         driver-class-name: org.postgresql.Driver
         xa-datasource-class-name: org.postgresql.xa.PGXADataSource
-        driver-module-name: org.postgresql      
+        driver-module-name: org.postgresql
   kafka-configuration:
     host: localhost
     port: 9092
+<<<<<<< HEAD
+=======
      
+>>>>>>> a67e3f123bff4aa4ec3dd5f47de7bd810e705d23

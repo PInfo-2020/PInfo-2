@@ -1,6 +1,6 @@
 package domain.model;
 
-import java.util.Date;
+import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -18,14 +18,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorColumn(name = "id")
+//@DiscriminatorColumn(name = "id")
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
 //@ApiModel(subTypes = {Bond.class, Stock.class, Deposit.class, Loan.class, Warrant.class}, discriminator = "userType")
-public abstract class User {
+public class AUser {
 
 	@Id
-	@Column(name="id", insertable=false, updatable=false)
+	@NotNull
+	//@Column(name="id", insertable=false, updatable=false)
 	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
 	private Long id;
@@ -37,13 +38,15 @@ public abstract class User {
 	private String email;
 
 	//@NotNull
-	//private List<Recipe> favoriteRecipes;
+	//private ArrayList<String> favoriteRecipes; // placeholder, 'Recipe' not ready yet
 
 	@NotNull
 	private Date registerDate;
 
-	private float ratingNum;
+	@NotNull
+	private int ratingNum;
 
-	private float ratingDenum;
+	@NotNull
+	private int ratingDenum;
 
 }

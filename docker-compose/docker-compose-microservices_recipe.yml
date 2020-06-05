@@ -1,0 +1,93 @@
+version: "3.5"
+
+services:
+
+
+  #Zookeeper service provides distributed configuration management to Kafka
+  zookeeper:
+    image: zookeeper:3.4.9
+    container_name: zookeeper
+    hostname: zookeeper
+    networks:
+      - backend-network
+    ports:
+      - "2181:2181"
+    environment:
+        ZOO_MY_ID: 1
+        ZOO_PORT: 2181
+        ZOO_SERVERS: server.1=zookeeper:2888:3888
+    volumes:
+      - ./target/zk-single-kafka-single/zoo1/data:/data
+      - ./target/zk-single-kafka-single/zoo1/datalog:/datalog
+
+#   kafka is the messaging backbone of the micro-service architecture. The objective is avoid point 2 point connections.
+  kafka:
+    image: confluentinc/cp-kafka:5.1.0
+    container_name: kafka
+    hostname: kafka
+    networks:
+      - backend-network
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    volumes:
+      - ./target/zk-single-kafka-single/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+
+  recipe-database:
+    image: postgres:10
+    container_name: recipe-database
+    hostname: recipe-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: rcp
+      POSTGRES_PASSWORD: rcp
+      POSTGRES_DB: recipe
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rcp", "-d", "recipe"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-recipe:/var/lib/postgresql/data
+      - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+  recipe-service:
+    container_name: recipe-service
+    image: unige/recipe-service:latest
+    hostname: recipe-service
+    networks:
+      - backend-network
+    ports:
+      - "15555:27777"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_CONNECTION_DASH_URL: "jdbc:postgresql://recipe-database:5432/recipe"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_DRIVER_DASH_NAME: 'postgresql'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: 'rcp'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: 'rcp'
+    depends_on:
+       - kafka
+       - recipe-database
+
+
+volumes:
+   pgdata-recipe:
+
+networks:
+  backend-network:
+    driver: bridge

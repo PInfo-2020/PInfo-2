@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+
+
+  __db_name__-database:
+    image: postgres:10
+    container_name: __db_name__-database
+    hostname: __db_name__-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: __db_username__
+      POSTGRES_PASSWORD: __db_userpw__
+      POSTGRES_DB: __db_name__
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "__db_username__", "-d", "__db_name__"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-__db_name__:/var/lib/postgresql/data
+      - ./test-data/__db_name__.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+volumes:
+   pgdata-__db_name__:
+
+networks:
+  backend-network:
+    driver: bridge
