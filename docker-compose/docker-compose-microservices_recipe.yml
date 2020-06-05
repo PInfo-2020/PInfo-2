@@ -43,50 +43,50 @@ services:
     depends_on:
       - zookeeper
 
-  __template__-database:
+  recipe-database:
     image: postgres:10
-    container_name: __template__-database
-    hostname: __template__-database
+    container_name: recipe-database
+    hostname: recipe-database
     networks:
      - backend-network
     environment:
-      POSTGRES_USER: __db_username__
-      POSTGRES_PASSWORD: __db_userpw__
-      POSTGRES_DB: __db_name__
+      POSTGRES_USER: rcp
+      POSTGRES_PASSWORD: rcp
+      POSTGRES_DB: recipe
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "__db_username__", "-d", "__db_name__"]
+      test: ["CMD", "pg_isready", "-U", "rcp", "-d", "recipe"]
       interval: 30s
       timeout: 30s
       retries: 3
     volumes:
-      - pgdata-__db_name__:/var/lib/postgresql/data
-      - ./test-data/__db_name__.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata-recipe:/var/lib/postgresql/data
+      - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     stdin_open: true
     tty: true
 
-  __template__-service:
-    container_name: __template__-service
-    image: unige/__template__-service:latest
-    hostname: __template__-service
+  recipe-service:
+    container_name: recipe-service
+    image: unige/recipe-service:latest
+    hostname: recipe-service
     networks:
       - backend-network
     ports:
-      - "__port_ext__:__port__"
+      - "15555:27777"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_CONNECTION_DASH_URL: "jdbc:postgresql://__db_name__-database:5432/__db_name__"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_CONNECTION_DASH_URL: "jdbc:postgresql://recipe-database:5432/recipe"
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_DRIVER_DASH_NAME: 'postgresql'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: '__db_username__'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: '__db_userpw__'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: 'rcp'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: 'rcp'
     depends_on:
        - kafka
-       - __template__-database
+       - recipe-database
 
 
 volumes:
-   pgdata-__db_name__:
+   pgdata-recipe:
 
 networks:
   backend-network:

@@ -1,0 +1,12 @@
+>Compile user-service with './make_user_service.sh'
+>Run     user-service with './start-user-database.sh'
+
+>Request GET  to http://localhost:__port_ext__/__template_instance__
+>Request POST to http://localhost:__port_ext__/__template_instance__/post
+>Add to header : Content-Type: application/json
+>Chech header content-length high enough, ex : Content-Length: 348
+
+> content ex :
+{
+"name":"test"
+}

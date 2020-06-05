@@ -39,15 +39,18 @@ if microservice_parameters == None:
         except Exception as e:
             print("{}\n --- An error occured. Try again ! ---\n\n\n".format(e))
 
+    microservice_parameters['__template_class__']    = microservice_parameters['__template__'][0].upper() + microservice_parameters['__template__'][1:]
+    microservice_parameters['__db_name__']           = microservice_parameters['__template_class__'].lower()
+    microservice_parameters['__port_offset__']       = microservice_parameters['__port__'] - 8080
+    microservice_parameters['__template_class_UC__'] = microservice_parameters['__template_class__'].upper()
+    microservice_parameters['__template_instance__'] = microservice_parameters['__template__']
+
     skip_lines(3)
     print("Please ensure these paremeters are correct : ")
     pprint(microservice_parameters)
     if input("Is it ok ? [y/n] ").lower() != 'y':
         sys.exit()
 
-    microservice_parameters['__db_name__']           = microservice_parameters['__template_class__'].lower()
-    microservice_parameters['__port_offset__']       = microservice_parameters['__port__'] - 8080
-    microservice_parameters['__template_class_UC__'] = microservice_parameters['__template_class__'].upper()
     with savefile.open('wb') as f:
         pickle.dump( microservice_parameters, f )
 
@@ -80,8 +83,8 @@ except Exception as e:
 print("OK !")
 
 print("Please note that you still have to : ")
-print("\t - copy docker-compose/*.* files to your actual docker-compose/ directory")
+print("\t - copy docker-compose/*.yml files to your actual docker-compose/ directory")
 print("\t - manually add the lines from docker-compose/clean.sh to the same file in your actual docker-compose/clean.sh")
 print("\t - add the name of your service in the main pom.xml")
 print("\t - copy .sh files to the root of PInfo-2 AND give them executable status with 'sudo chmod +x ./*.sh'")
-print("\t - create a .sql file in docker-compose/test-data, that creates the relation and optionally creates instances in it (don't forget to uncomment the line that loads this SQL file in docker-compose-* files)'")
+print("\t - (optional because the Java microservice uses create-drop method, so this would only work when the database service is launched and NOT the Java microservice) create a .sql file in docker-compose/test-data, that creates the relation and optionally creates instances in it (don't forget to uncomment the line that loads this SQL file in docker-compose-* files)'")
