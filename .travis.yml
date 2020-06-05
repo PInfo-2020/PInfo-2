@@ -1,13 +1,4 @@
 language: java
-
-# Set current branch to DAVID-TEST
-branches:
-  only:
-    - david-test
-
-# Don't use the Maven default command
-install: /bin/true
-
 env:
   matrix:
   - NODE_VERSION="12.13.1"
@@ -26,43 +17,35 @@ jobs:
   - stage: Prepare
     script:
     - nvm install $NODE_VERSION
-    - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
+    - mvn install -N -DskipTests=true -Dmaven.javadoc.skip=true -B -V
   - stage: Build
     script:
-    - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
-    # Removing databases
-    - v_list=$(docker ps -aq)
-    - docker stop $v_list 2>/dev/null
-    - docker rm $v_list 2>/dev/null
-    - docker volume rm docker-compose_pgdata-usr 2>/dev/null
-    # Launching service
-    - docker-compose -f docker-compose/docker-compose-microservices_user.yml up
-
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    #- docker tag unige/api-gateway tropin98/api-gateway:latest
-    #- docker tag unige/regulatory-service tropin98/regulatory-service:latest
-    #- docker tag unige/valuation-service tropin98/valuation-service:latest
-    #- docker tag unige/instrument-service tropin98/instrument-service:latest
-    #- docker tag unige/counterparty-service tropin98/counterparty-service:latest
-    #- docker push tropin98/api-gateway:latest
-    #- docker push tropin98/regulatory-service:latest
-    #- docker push tropin98/valuation-service:latest
-    #- docker push tropin98/instrument-service:latest
-    #- docker push tropin98/counterparty-service:latest
-    #- mvn sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2 -Dsonar.organization=pinfo-2020
-    #  -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=68db16192c9f0533a0926c86cf71c30b2331c97c
-  #- stage: Build
-    #script:
-    #- cd web-ui
-    #- pwd
-    #- npm -v
-    #- npm install
-    #- npm update
-    #- npm run-script build --prod
-    #- docker build -t unige/web-ui .
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    #- docker tag unige/web-ui tropin98/web-ui:latest
-    #- docker push tropin98/web-ui:latest
+    - mvn install -Ppackage-docker-image
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag unige/api-gateway tropin98/api-gateway:latest
+    - docker tag unige/regulatory-service tropin98/regulatory-service:latest
+    - docker tag unige/valuation-service tropin98/valuation-service:latest
+    - docker tag unige/instrument-service tropin98/instrument-service:latest
+    - docker tag unige/counterparty-service tropin98/counterparty-service:latest
+    - docker push tropin98/api-gateway:latest
+    - docker push tropin98/regulatory-service:latest
+    - docker push tropin98/valuation-service:latest
+    - docker push tropin98/instrument-service:latest
+    - docker push tropin98/counterparty-service:latest
+    - mvn sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2 -Dsonar.organization=pinfo-2020
+      -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=68db16192c9f0533a0926c86cf71c30b2331c97c
+  - stage: Build
+    script:
+    - cd web-ui
+    - pwd
+    - npm -v
+    - npm install
+    - npm update
+    - npm run-script build --prod
+    - docker build -t unige/web-ui .
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag unige/web-ui tropin98/web-ui:latest
+    - docker push tropin98/web-ui:latest
 
 addons:
   sonarcloud:
