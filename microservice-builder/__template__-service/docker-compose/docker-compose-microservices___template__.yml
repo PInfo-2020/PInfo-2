@@ -76,10 +76,10 @@ services:
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_CONNECTION_DASH_URL: "jdbc:postgresql://__db_name__-database:5432/__db_name__"
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_DRIVER_DASH_NAME: 'postgresql'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: '__db_username__'
-      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: '__db_userpw__'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES___template_class_UC__DS_CONNECTION_DASH_URL: "jdbc:postgresql://__db_name__-database:5432/__db_name__"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES___template_class_UC__DS_DRIVER_DASH_NAME: 'postgresql'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES___template_class_UC__DS_USER_DASH_NAME: '__db_username__'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES___template_class_UC__DS_PASSWORD: '__db_userpw__'
     depends_on:
        - kafka
        - __template__-database
