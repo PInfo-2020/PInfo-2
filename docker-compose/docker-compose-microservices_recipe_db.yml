@@ -1,0 +1,33 @@
+version: "3.5"
+
+services:
+
+
+  recipe-database:
+    image: postgres:10
+    container_name: recipe-database
+    hostname: recipe-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: rcp
+      POSTGRES_PASSWORD: rcp
+      POSTGRES_DB: recipe
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rcp", "-d", "recipe"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-recipe:/var/lib/postgresql/data
+      - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+volumes:
+   pgdata-recipe:
+
+networks:
+  backend-network:
+    driver: bridge
