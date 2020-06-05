@@ -16,3 +16,4 @@ GRANT SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public to usr;
 TRUNCATE TABLE AUser;
 INSERT INTO AUser (id, name, email, registerDate, ratingNum, ratingDenum) values ( nextval('USER_SEQ'), 'Bob', 'bob.samplomb@gmail.com', TO_DATE('17-09-2017','DD-MM-YYYY'), 45, 77 );
 INSERT INTO AUser (id, name, email, registerDate, ratingNum, ratingDenum) values ( nextval('USER_SEQ'), 'Bob', 'invalid@mailLOL', TO_DATE('03-04-2019','DD-MM-YYYY'), 99, 121 );
+

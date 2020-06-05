@@ -31,7 +31,7 @@ public class UserRestService {
 	private UserService userService;
 	@Inject
 	private UserProducer userProducer;
-
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Get all the AUsers",
