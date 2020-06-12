@@ -85,6 +85,11 @@ services:
        - recipe-database
 
 
+  web-ui:
+    image: web-ui:latest
+    ports:
+      - "80:80"
+
 volumes:
    pgdata-recipe:
 

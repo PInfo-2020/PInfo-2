@@ -1,0 +1,43 @@
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1 style="color:orange;text-align: center;">Trouver une recette</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<p style="text-align: center;">Nom de la recette:<br />
+  <input type="text" class="form-control" width="30px" [(ngModel)]="recipename">
+
+  <br />Nombre de personnes:<br />
+  <input type="text" class="form-control" [(ngModel)]="personnumber">
+
+  <br />
+
+Temps de pr&eacute;paration:
+  <br /> <input type="text" class="form-control" [(ngModel)]="preptime">
+
+  <br />Note:<br />
+  <input type="text" class="form-control" [(ngModel)]="ratinggrade">
+</p>
+
+
+<input type="checkbox" [checked]="VegetarianCheck" (change)="VegetarianSwitch()">V&eacute;g&eacute;tarien  {{VegetarianCheck}}<br>
+<input type="checkbox" [checked]="FridgeCheck" (change)="FridgeSwitch()">Du frigo  {{FridgeCheck}}<br>
+
+<button class="btn button-success" (click)="searchButton()">Rechercher recette</button>
+
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<p>Listes des recettes qui satisfont ces exigences:</p>
+
+<app-listrecipe [listrecipe]="searched_recipe_" [modefavourite]=true [modedeletefromfavourite]=true [modepublish]=true></app-listrecipe>
+
+
+
+
+<p>----------------------</p>
+<p>Nom recette: {{getRecipeName()}}</p>
+<p>Durée préparation {{getPreparationTime()}}</p>
+<p>Note: {{getRating()}}</p>
+<p>Nombre personnes {{getPersonNumber()}}</p>
+<p>----------------------</p>

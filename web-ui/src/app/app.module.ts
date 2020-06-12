@@ -1,46 +1,62 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CoreModule } from './@core/core.module';
+
+
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { MyfridgeComponent } from './myfridge/myfridge.component';
+import { CreaterecipeComponent } from './createrecipe/createrecipe.component';
+import { FindrecipeComponent } from './findrecipe/findrecipe.component';
+import { DisplayingrecipeComponent } from './displayingrecipe/displayingrecipe.component';
+import { Routes, RouterModule } from '@angular/router';
+import { UserpageComponent } from './userpage/userpage.component';
+import { SubscribepageComponent } from './subscribepage/subscribepage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListrecipeComponent } from './listrecipe/listrecipe.component';
+import { TilerecipeComponent } from './tilerecipe/tilerecipe.component';
+import { ListingredientComponent } from './listingredient/listingredient.component';
+import { MyrecipeComponent } from './myrecipe/myrecipe.component';
+
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { ThemeModule } from './@theme/theme.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { KeycloakService } from './services/keycloak/keycloak.service';
-import { KeycloakInterceptorService } from './services/keycloak/keycloak.interceptor.service';
-import { CounterpartyService } from './domain/counterpartyService';
-import { InstrumentStatisticsService } from './domain/instrumentStatisticsService';
+import {HttpClientModule} from '@angular/common/http';
+
+
+const appRoutes: Routes = [
+  { path: 'FindRecipe', component: FindrecipeComponent },
+  { path: 'UserPage', component: UserpageComponent },
+  { path: 'SubscribePage', component: SubscribepageComponent },
+  { path: 'MyFridge', component: MyfridgeComponent },
+  { path: 'CreateRecipe', component: CreaterecipeComponent },
+  { path: 'LogIn', component: LoginComponent },
+
+];
+
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NgbModule.forRoot(),
-    ThemeModule.forRoot(),
-    CoreModule.forRoot(),
-  ],
-  bootstrap: [AppComponent],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-    CounterpartyService,
-    InstrumentStatisticsService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeycloakInterceptorService,
-      multi: true,
-    },
-    KeycloakService,
-  ],
+   declarations: [
+      AppComponent,
+      LoginComponent,
+      MyfridgeComponent,
+      CreaterecipeComponent,
+      FindrecipeComponent,
+      DisplayingrecipeComponent,
+      UserpageComponent,
+      SubscribepageComponent,
+      ListrecipeComponent,
+      TilerecipeComponent,
+      ListingredientComponent,
+      MyrecipeComponent
+   ],
+   imports: [
+      BrowserModule,
+      FormsModule,
+      RouterModule.forRoot(appRoutes),
+      BrowserAnimationsModule,
+      HttpClientModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
-export class AppModule {
-}
+export class AppModule { }
