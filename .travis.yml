@@ -31,7 +31,7 @@ jobs:
     script:
     - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker tag marktropin/user-service marktropin/user-service:latest
+    - docker tag pinfo2/user-service marktropin/user-service:latest
     - docker push marktropin/user-service:latest
 
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
