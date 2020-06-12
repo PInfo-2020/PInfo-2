@@ -60,7 +60,7 @@ services:
       retries: 3
     volumes:
       - pgdata-usr:/var/lib/postgresql/data
-      - ./test-data/users.sql:/docker-entrypoint-initdb.d/init.sql
+      #- ./test-data/users.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     stdin_open: true
     tty: true
