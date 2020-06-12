@@ -1,6 +1,6 @@
 language: java
 
-# Set current branch to DAVID-TEST
+# Set current branch to MASTER
 branches:
   only:
     - master
@@ -31,12 +31,12 @@ jobs:
     script:
     - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
     # Removing databases
-    - v_list=$(docker ps -aq)
-    - docker stop $v_list 2>/dev/null
-    - docker rm $v_list 2>/dev/null
-    - docker volume rm docker-compose_pgdata-usr 2>/dev/null
+    #- v_list=$(docker ps -aq)
+    #- docker stop $v_list 2>/dev/null
+    #- docker rm $v_list 2>/dev/null
+    #- docker volume rm docker-compose_pgdata-usr 2>/dev/null
     # Launching service
-    - docker-compose -f docker-compose/docker-compose-microservices_user.yml up
+    #- docker-compose -f docker-compose/docker-compose-microservices_user.yml up
 
     #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
