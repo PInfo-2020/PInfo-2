@@ -1,0 +1,35 @@
+version: "3.5"
+
+services:
+
+
+  ingredient-database:
+    image: postgres:10
+    container_name: ingredient-database
+    hostname: ingredient-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: ingr
+      POSTGRES_PASSWORD: ingr
+      POSTGRES_DB: ingredient
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "ingr", "-d", "ingredient"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-ingr:/var/lib/postgresql/data
+      - ./test-data/ingredients.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+volumes:
+   pgdata-cpty:
+   pgdata-ingr:
+
+
+networks:
+  backend-network:
+    driver: bridge
