@@ -1,7 +1,0 @@
->user-service:
->>Make email a unique identifier, so no two users can have the same email, to avoid duplicates
->>Make tests
->>POST and GET seem to work, but everything else is untested
->>For now, when running locally, any user POSTed is lost when restarting the service.
-  This is done for testing purposes (see 'start-user-database.sh') but there may be other causes.
-  I suspect 'hibernate.hbm2ddl.auto' in persistence.xml to drop the table.
