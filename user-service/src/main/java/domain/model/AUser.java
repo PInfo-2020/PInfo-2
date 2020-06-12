@@ -49,4 +49,40 @@ public class AUser {
 	@NotNull
 	private int ratingDenum;
 
+	public AUser(){
+		this.name  = null;
+		this.email = null;
+		this.registerDate = null;
+		this.ratingNum = 0;
+		this.ratingDenum = 0;
+	}
+
+	public AUser( Long id, String name, String email, Date registerDate, int ratingNum, int ratingDenum ){
+		this.name  = name;
+		this.email = email;
+		this.registerDate = (registerDate == null) ? new Date() : registerDate;
+		this.ratingNum = ratingNum;
+		this.ratingDenum = ratingDenum;
+	}
+
+	public AUser( AUser usr ){
+		this.name  = usr.name;
+		this.email = usr.email;
+		this.registerDate = new Date();
+		this.ratingNum = 0;
+		this.ratingDenum = 0;
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
 }

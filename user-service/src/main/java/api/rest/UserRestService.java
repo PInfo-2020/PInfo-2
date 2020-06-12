@@ -31,7 +31,7 @@ public class UserRestService {
 	private UserService userService;
 	@Inject
 	private UserProducer userProducer;
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Get all the AUsers",
@@ -68,7 +68,7 @@ public class UserRestService {
 		System.out.println(user);
 		userService.create(user);
 		//userProducer.send(user);
-		System.out.println("After");
+		//System.out.println("After");
 		System.out.println(user);
 	}
 

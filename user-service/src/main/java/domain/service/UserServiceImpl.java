@@ -52,10 +52,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void create(AUser user) {
-		/*if ( user.getId() != null or get(user.getId())!=null ) {
+		if ( user.getId() != null ) {
 			throw new IllegalArgumentException("AUser already exists : " + user.getId());
-		}*/
-		em.persist(user);
-		
+		}
+		em.persist(new AUser(user));
+
 	}
 }
