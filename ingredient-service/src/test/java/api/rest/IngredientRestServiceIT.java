@@ -18,19 +18,25 @@ public class IngredientRestServiceIT {
 
 	@Test
 	public void testGetAll() {
+		System.out.println("TEST GET ALL");
 		when().get("/").then().body(containsString("Abricot, cru"));
 
 	}
 
+
+	@Test
+	public void testGetById() {
+		when().get("/1").then().body(containsString("48"));
+	}
+
 	@Test
 	public void testGet() {
-		when().get("/Ail, cru").then().body(containsString("137"));
+		when().get("/name/Ail").then().body(containsString("137"));
 	}
 
 	@Test
 	public void testGetByType() {
 		when().get("/type/Viande").then().body(containsString("155"));
 	}
-
 
 }

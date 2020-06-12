@@ -66,7 +66,7 @@ class IngredientServiceImplTest {
 
 	private Ingredient getRandomIngredient() {
 		Ingredient ing = new Ingredient();
-
+        ing.setId((long)Math.round((Math.random() * 10)));
 		ing.setProductName(UUID.randomUUID().toString());
 		ing.setProductType(UUID.randomUUID().toString());
 		ing.setCalories((int)Math.round((Math.random() * 10)) + 23);

@@ -13,8 +13,10 @@
 			<property name="hibernate.generate_statistics" value="true" /> <!-- added for log4j -->
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.H2Dialect" />
+			<!--	<property name="hibernate.dialect"
+                  value="org.hibernate.dialect.PostgreSQL82Dialect" /> -->
 			<property name="hibernate.id.new_generator_mappings" value="true" />
-			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>	
+			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -22,7 +22,26 @@ public class IngredientRestService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "retrieve all products (possible ingredients)")
 	public List<Ingredient> getAll() {
+		System.out.println("coucou from GetAll");
 		return ingredientService.getAll();
+	}
+
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Get a specific product using its ID")
+	public Ingredient getById(@PathParam("id") Long id) {
+
+		return ingredientService.getById(id);
+	}
+
+	@GET
+	@Path("/name/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Get a specific product using its name")
+	public Ingredient get(@PathParam("name") String productName) {
+
+		return ingredientService.get(productName);
 	}
 
 	@GET
@@ -41,14 +60,6 @@ public class IngredientRestService {
 		return ingredientService.getByType(productType);
 	}
 
-	@GET
-	@Path("{name}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Get a specific product using its name")
-	public Ingredient get(@PathParam("name") String productName) {
-		return ingredientService.get(productName);
-	}
-
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)  //charset=UTF-8
@@ -62,7 +73,6 @@ public class IngredientRestService {
 	@Consumes(MediaType.APPLICATION_JSON)  //charset=UTF-8
 	@ApiOperation(value = "update a product")
 	public void update(Ingredient product) {
-		System.out.println("After");
 		ingredientService.update(product);
 	}
 

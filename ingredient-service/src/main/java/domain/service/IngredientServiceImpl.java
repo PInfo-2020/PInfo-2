@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -82,18 +83,38 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
+	public Ingredient getById(Long Id){
+		log.info("IngredientServiceImpl get product by ID");
+		return em.find(Ingredient.class, Id);
+	}
+
+	@Override
 	public Ingredient get(String productName) {
 		log.info("IngredientServiceImpl get product by name");
-		return em.find(Ingredient.class, productName);
+		//return em.find(Ingredient.class, productName);
+
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Ingredient> criteria = builder.createQuery(Ingredient.class);
+		Root<Ingredient> c = criteria.from(Ingredient.class);
+		ParameterExpression<String> p = builder.parameter(String.class);
+		criteria.select(c).where(builder.equal(c.get("productName"), p));
+		try {
+			return em.createQuery(criteria).setParameter(p, productName).getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
 	}
 
 	@Override
 	@Transactional
 	public void create(Ingredient product) {
+		log.info("IngredientServiceImpl create ingredient");
 		if (get(product.getProductName()) != null) {
 			throw new IllegalArgumentException("Product already exist : " + product.getProductName());
 		}
+		log.info("Create ingredient before persist");
 		em.persist(product);
+		log.info("Create ingredient after persist");
 	}
 
 	@Override
