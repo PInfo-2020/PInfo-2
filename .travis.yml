@@ -30,15 +30,10 @@ jobs:
   - stage: Build
     script:
     - mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
-    # Removing databases
-    #- v_list=$(docker ps -aq)
-    #- docker stop $v_list 2>/dev/null
-    #- docker rm $v_list 2>/dev/null
-    #- docker volume rm docker-compose_pgdata-usr 2>/dev/null
-    # Launching service
-    #- docker-compose -f docker-compose/docker-compose-microservices_user.yml up
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker tag marktropin/user-service marktropin/user-service:latest
+    - docker push marktropin/user-service:latest
 
-    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
     #- docker tag unige/regulatory-service tropin98/regulatory-service:latest
     #- docker tag unige/valuation-service tropin98/valuation-service:latest
