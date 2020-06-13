@@ -52,20 +52,20 @@ preptime: "<temps de préparation total>"
 ## Rest Format: 
 ```http://localhost:<port>/<page>/``` à compléter en fonction du cas. Par défaut <port> vaut 80.
 
-poster une recette: ```myfridge/myingredient/post```  
-supprimer un ingrédient: ```myfridge/myingredient/delete```  
+-poster une recette: ```myfridge/myingredient/post```  
+-supprimer un ingrédient: ```myfridge/myingredient/delete```  
 
 
-obtenir le résultat de la recherche: ```myfridge/searchresult```  
-envoyer une requête de recherche au serveur: ```myfridge/searchrecipe```  
+-obtenir le résultat de la recherche: ```myfridge/searchresult```  
+-envoyer une requête de recherche au serveur: ```myfridge/searchrecipe```  
 
 
-ajouter une recette aux favoris ```myfridge/myfavourite/post```  
-supprimer favori ```myfridge/myfavourite/delete```  
+-ajouter une recette aux favoris ```myfridge/myfavourite/post```  
+-supprimer favori ```myfridge/myfavourite/delete```  
 
  
-publier recette ```myfridge/mypublication/post```  
-supprimer des publications ```myfridge/mypublication/delete```  
+-publier recette ```myfridge/mypublication/post```  
+-supprimer des publications ```myfridge/mypublication/delete```  
 
 ## How to set up your project:
 
