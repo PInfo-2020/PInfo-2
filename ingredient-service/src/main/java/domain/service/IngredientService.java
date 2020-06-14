@@ -10,6 +10,6 @@ public interface IngredientService {
 	List<Ingredient> getAll();
 	List<Ingredient> getByType(String productType);
 	List<Ingredient> searchByName(String name);
-	void create(Ingredient product);
+	Long create(Ingredient product);
 	void update(Ingredient product);
 }

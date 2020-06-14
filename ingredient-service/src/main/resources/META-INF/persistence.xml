@@ -7,14 +7,14 @@
 		transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/ingredientds</jta-data-source>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<!-- <property name="hibernate.show_sql" value="true" />  temporary disabled  for log4j -->
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.generate_statistics" value="true" /> <!-- added for log4j -->
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.H2Dialect" />
-			<!--	<property name="hibernate.dialect"
-                  value="org.hibernate.dialect.PostgreSQL82Dialect" /> -->
+			<!-- <property name="hibernate.dialect"
+				value="org.hibernate.dialect.H2Dialect" /> -->
+				<property name="hibernate.dialect"
+                  value="org.hibernate.dialect.PostgreSQL82Dialect" />
 			<property name="hibernate.id.new_generator_mappings" value="true" />
 			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
 		</properties>

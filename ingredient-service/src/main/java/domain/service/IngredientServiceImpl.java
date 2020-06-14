@@ -22,7 +22,6 @@ import domain.model.Ingredient;
 import lombok.extern.java.Log;
 
 
-import org.w3c.dom.ls.LSOutput;
 
 @ApplicationScoped
 @Log
@@ -35,9 +34,9 @@ public class IngredientServiceImpl implements IngredientService {
 	@PersistenceContext(unitName = "IngredientPU")
 	private EntityManager em;
 
-	public IngredientServiceImpl() {
+/*	public IngredientServiceImpl() {
 		System.setProperty("log4j.properties","./path_to_the_log4j2_config_file/log4j2.xml");
-	}
+	}*/
 
 
 	@Override
@@ -107,21 +106,27 @@ public class IngredientServiceImpl implements IngredientService {
 
 	@Override
 	@Transactional
-	public void create(Ingredient product) {
+	public Long create(Ingredient product) {
 		log.info("IngredientServiceImpl create ingredient");
 		if (get(product.getProductName()) != null) {
 			throw new IllegalArgumentException("Product already exist : " + product.getProductName());
 		}
-		log.info("Create ingredient before persist");
+		log.info("Create ingredient before persist. Id value: "  + product.getId());
 		em.persist(product);
-		log.info("Create ingredient after persist");
+		log.info("Create ingredient after persist. Id value : " + product.getId());
+		return  product.getId();
 	}
 
 	@Override
 	@Transactional
 	public void update(Ingredient product) {
-		if  (get(product.getProductName()) == null) {
+		Ingredient compareElement = get(product.getProductName());
+		if  (compareElement == null) {
 			throw new IllegalArgumentException("Product does not exist : " + product.getProductName());
+		} else {
+			if (product.getId() != compareElement.getId()){
+				throw new IllegalArgumentException("Duplicate name: " + product.getProductName());
+			}
 		}
 		em.merge(product);
 	}

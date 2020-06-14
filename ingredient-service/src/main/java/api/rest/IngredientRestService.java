@@ -64,9 +64,9 @@ public class IngredientRestService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)  //charset=UTF-8
 	@ApiOperation(value = "Create a new product reference ")
-	public void create(Ingredient ingr) {
+	public Long create(Ingredient ingr) {
 		//System.out.println(ingr);
-		ingredientService.create(ingr);
+		return ingredientService.create(ingr);
 	}
 
 	@PUT
