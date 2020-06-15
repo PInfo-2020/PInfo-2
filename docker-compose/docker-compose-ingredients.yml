@@ -84,7 +84,6 @@ services:
       - ingredient-database
 
 volumes:
-  pgdata-cpty:
   pgdata-ingr:
 
 

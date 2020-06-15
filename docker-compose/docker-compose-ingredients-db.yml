@@ -26,7 +26,6 @@ services:
     tty: true
 
 volumes:
-  pgdata-cpty:
   pgdata-ingr:
 
 

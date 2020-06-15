@@ -27,7 +27,7 @@ import lombok.extern.java.Log;
 @Log
 public class IngredientServiceImpl implements IngredientService {
 
-   // Create logger for logging SQL statements with parameters
+   // Create logger for logging SQL statements with parameters (using log4j)
 	private static final Logger logger = LogManager.getLogger(IngredientService.class);
 
 
@@ -70,14 +70,12 @@ public class IngredientServiceImpl implements IngredientService {
 		Root<Ingredient> c = criteria.from(Ingredient.class);
 		ParameterExpression<String> p = builder.parameter(String.class);
 		criteria.select(c).where(builder.like(builder.lower(c.get("productName")), p));
-		//criteria.select(c).where(builder.like(c.get("productName"), p));
 		return em.createQuery( criteria ).setParameter(p,'%' + name.toLowerCase() + '%').getResultList();
 
 	/*	Predicate lcSurnameLikeSearchPattern = criteriaBuilder.like(
 				criteriaBuilder.lower(Person_.surname),
 				searchPattern.toLowerCase());
 		criteriaQuery.where(lcSurnameLikeSearchPattern);
-
 	 */
 	}
 
@@ -90,8 +88,6 @@ public class IngredientServiceImpl implements IngredientService {
 	@Override
 	public Ingredient get(String productName) {
 		log.info("IngredientServiceImpl get product by name");
-		//return em.find(Ingredient.class, productName);
-
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Ingredient> criteria = builder.createQuery(Ingredient.class);
 		Root<Ingredient> c = criteria.from(Ingredient.class);
@@ -120,6 +116,7 @@ public class IngredientServiceImpl implements IngredientService {
 	@Override
 	@Transactional
 	public void update(Ingredient product) {
+		log.info("IngredientServiceImpl update ingredient");
 		Ingredient compareElement = get(product.getProductName());
 		if  (compareElement == null) {
 			throw new IllegalArgumentException("Product does not exist : " + product.getProductName());
