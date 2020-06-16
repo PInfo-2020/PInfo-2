@@ -58,8 +58,8 @@
    return : ingredient Id
 
   When testing POST from browser, you should :
-  >Add to header : Content-Type: application/json
-  >Check header content-length high enough, ex : Content-Length: 348
+  Add to header : Content-Type: application/json
+  Check header content-length high enough, ex : Content-Length: 348
 
    Request POST body example:
 
@@ -76,8 +76,8 @@
      http://localhost:11080/ingredients
 
   When testing PUT from browser, you should :
-  >Add to header : Content-Type: application/json
-  >Check header content-length high enough, ex : Content-Length: 348
+  Add to header : Content-Type: application/json
+  Check header content-length high enough, ex : Content-Length: 348
 
    Request PUT body example:
     {
