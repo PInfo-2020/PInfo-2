@@ -1,0 +1,95 @@
+                             Ingredient-service API description:
+
+-get all products
+ GET
+ http://localhost:11080/ingredients
+
+-get product by exact name
+ GET
+ http://localhost:11080/ingredients/name/Agneau,%20c%C3%B4telette
+
+-get product by Id
+ GET
+ http://localhost:11080/ingredients/3
+
+- search by name (contains string ingnoring case) (
+  GET
+  http://localhost:11080/ingredients/search/abricot
+
+  result:
+
+[{
+  "id":1,
+  "productName":"Abricot, cru",
+  "productType":"Fruits",
+  "calories":48,
+  "units":"par 100 g de portion comestible"
+  },
+  {
+  "id":2,
+  "productName":"Abricot, sec",
+  "productType":"Fruits/Fruits secs",
+  "calories":275,
+  "units":"par 100 g de portion comestible"
+  }]
+
+-search by type (contains string ingnoring case)
+  GET
+  http://localhost:11080/ingredients/type/viande
+
+  [{
+  "id":3,
+  "productName":"Agneau, côtelette",
+  "productType":"Viande et abats/Agneau, mouton",
+   "calories":179,
+   "units":"par 100 g de portion comestible"
+   },
+   {
+   "id":4,
+   "productName":"Agneau, gigot",
+   "productType":"Viande et abats/Agneau, mouton",
+   "calories":155,
+   "units":"par 100 g de portion comestible"
+   }]
+
+- add new ingredient
+   POST
+   http://localhost:11080/ingredients
+   return : ingredient Id
+
+  When testing POST from browser, you should :
+  >Add to header : Content-Type: application/json
+  >Check header content-length high enough, ex : Content-Length: 348
+
+   Request POST body example:
+
+   {
+   "productName":"Avocat crue",
+   "productType":"Legumes frais",
+   "calories":"144",
+   "units":"par 100 g de portion comestible"
+   }
+
+
+ -update ingredient:
+     PUT
+     http://localhost:11080/ingredients
+
+  When testing PUT from browser, you should :
+  >Add to header : Content-Type: application/json
+  >Check header content-length high enough, ex : Content-Length: 348
+
+   Request PUT body example:
+    {
+    "id":16,
+    "productName":"Avoine, flocons",
+    "productType":" flocons et cereales",
+    "calories":"381",
+    "units":"par 100 g de portion comestible"
+    }
+
+
+
+
+
+
