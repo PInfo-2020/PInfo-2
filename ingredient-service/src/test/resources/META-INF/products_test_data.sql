@@ -1,6 +1,6 @@
 drop table Ingredient if exists ;
 drop sequence INGR_SEQ if exists;
-create sequence INGR_SEQ start with 1 increment by 1;
+create sequence INGR_SEQ start with 1 increment by 50;
 create table Ingredient (
         id bigint not null,
         productName varchar(100),

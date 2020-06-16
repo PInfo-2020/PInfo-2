@@ -1,6 +1,6 @@
 drop table User if exists;
 drop sequence if exists USER_SEQ;
-create sequence USER_SEQ start with 1 increment by 20;
+create sequence USER_SEQ start with 1 increment by 50;
 create table User (
         id bigint not null,
         name varchar(255) not null,

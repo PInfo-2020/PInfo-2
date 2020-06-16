@@ -1,6 +1,6 @@
 drop table Ingredient if exists ;
 drop sequence INGR_SEQ if exists;
-create sequence INGR_SEQ start with 1 increment by 1;
+create sequence INGR_SEQ start with 1 increment by 50;
 create table Ingredient (
         id bigint not null,
         productName varchar(100),
@@ -18,4 +18,3 @@ INSERT INTO Ingredient (id, productName, productType, calories, units)  values (
 INSERT INTO Ingredient (id, productName, productType, calories, units)  values (INGR_SEQ.nextval, 'Airelle rouge, crue', 'Fruits/Fruits frais', 40,	'par 100 g de portion comestible');
 INSERT INTO Ingredient (id, productName, productType, calories, units)  values (INGR_SEQ.nextval, 'Amande', 'Noix, graines et produits oléagineux', 2450, 'par 100 g de portion comestible');
 INSERT INTO Ingredient (id, productName, productType, calories, units)  values (INGR_SEQ.nextval, 'Amarante',	'Cereales',1580, 'par 100 g de portion comestible');
-
