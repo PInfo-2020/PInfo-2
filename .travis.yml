@@ -44,7 +44,7 @@ jobs:
     - docker push pinfo2/ingredient-service:latest
     - docker tag unige/recipe-service pinfo2/recipe-service:latest
     - docker push pinfo2/recipe-service:latest
-
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
     #- docker tag unige/regulatory-service tropin98/regulatory-service:latest
     #- docker tag unige/valuation-service tropin98/valuation-service:latest
