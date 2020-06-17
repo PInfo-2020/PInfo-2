@@ -1,0 +1,33 @@
+<h1 style="text-align: center;">Information recette</h1>
+
+
+
+<img [src]="recipeimage" style="width:80px">
+
+<p>Nom de la recette:  {{recipename}}<br />
+  <br />Nombre de personnes: {{personnumber}}<br />
+  <br />
+  Temps de pr&eacute;paration: {{preptime}}
+  <br />
+  <br />
+ Instructions: {{preptext}}
+  <br /><br />
+ Commentaires:  {{commtext}}
+  <br />
+Note:  {{ratinggrade}}
+
+</p>
+
+
+<h4>Ingrédients de la recette:</h4>
+<app-listingredient [listingredient]="ingredientlist" [iseditable]=false [modeadd]=true [modeuser]=false></app-listingredient>
+
+
+
+<br />
+<input type="text" class="form-control" [(ngModel)]="sendgrade">
+<button class="btn button-success" (click)="sendGrade()">Envoyer note</button>
+<br />
+<textarea rows="8" cols="100" [(ngModel)]="sendcomm"></textarea>
+<button class="btn button-success" (click)="sendComment()">Envoyer commentaire</button>
+<br /><button class="btn button-success" (click)="modifyRecipe()">Modifier recette</button>

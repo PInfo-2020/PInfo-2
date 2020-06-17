@@ -1,0 +1,42 @@
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 style="text-align: center;">Fridge to Plate</h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h4 style="text-align: center;">Se connecter:</h4>
+
+
+
+
+<div class="container">
+  <div class="panel panel-default"><div class="panel-body">
+<p style="text-align: center;">
+  <h4>Nom d'utilisateur:</h4>
+  <br />
+  <input type="text" class="form-control" [(ngModel)]="username">
+  <br />
+  <h4>Mot de passe:</h4>
+  <br />
+  <input type="password" class="form-control" [(ngModel)]="password">
+  <br />
+  <br />
+  <button class="btn button-success" (click)="loginPressed()">login</button>
+  <p>
+</div>
+</div>
+</div>
+
+
+
+
+
+<p style="text-align: center;">&nbsp;</p>
+<p>&nbsp;</p>
+<p style="text-align: center;">Pas encore de compte?</p>
+<p style="text-align: center;"><a title="forgotten_password_"(click)="subscribePage()">S'inscrire.</a></p>
+
+
+<p>----------------------</p>
+<p>Nom d'utilisateur entré: {{getUsername()}}</p>
+<p>Mot de passe: {{getPassword()}}</p>
+<p>----------------------</p>

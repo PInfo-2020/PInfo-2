@@ -1,0 +1,29 @@
+.button {
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     border-radius: 20px;
+     color: #FFFFFF;
+     font-family: Open Sans;
+     font-size: 40px;
+     font-weight: 100;
+     padding: 40px;
+     background-color: #3DF6B1;
+     box-shadow: 1px 1px 20px 0px #000000;
+     -webkit-box-shadow: 1px 1px 20px 0px #000000;
+     -moz-box-shadow: 1px 1px 20px 0px #000000;
+     text-shadow: 1px 1px 20px #000000;
+     border: solid #337FED 1px;
+     text-decoration: none;
+     display: inline-block;
+     cursor: pointer;
+     text-align: center;
+  }
+
+  .Button:hover {
+     background: #1ED07E;
+     border: solid #337FED 1px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     border-radius: 20px;
+     text-decoration: none;
+  }

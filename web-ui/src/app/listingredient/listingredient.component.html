@@ -1,0 +1,57 @@
+
+
+
+
+
+<div *ngIf="iseditable === true"><!---If it is editable.-->
+  <p>Nom de l'ingrédient:<br />
+    <input type="text" class="form-control" [(ngModel)]="name">
+
+    <br />Image de l'ingrédient:<br />
+    <input type="text" class="form-control" [(ngModel)]="image">
+
+    <br />
+
+  Quantité:
+    <br /> <input type="text" class="form-control" [(ngModel)]="quantity">
+
+    <br />Nombre<br />
+    <input type="text" class="form-control" [(ngModel)]="unit">
+  </p>
+    <button class="btn button-success" (click)="addButton()">Ajouter un ingrédient.</button>
+  </div>
+
+
+
+
+<table class="table">
+  <tbody>
+  <tr *ngFor="let ingredient of listingredient;let indexOfelement=index;">
+    <td><img [src]="ingredient.image" style="width:80px"></td>
+    <td><a href="google.com">{{ ingredient.name }}</a>  </td>
+    <td>{{ingredient.quantity}}</td>
+    <td>{{ ingredient.unit }}X</td>
+    <td *ngIf="modeadd === true">
+
+
+
+      <button class="btn button-success" (click)="addIngredient(indexOfelement,ingredient)">Ajouter à mes ingrédients</button>
+
+
+
+    </td>
+    <td *ngIf="iseditable === true">
+
+
+
+      <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteButton(indexOfelement,ingredient)"><i class="fa fa-remove"></i></button>
+
+
+
+
+    </td>
+
+  </tr>
+</tbody>
+</table>
+

@@ -1,21 +1,31 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import { Component, OnInit } from '@angular/core';
-import { AnalyticsService } from './@core/utils/analytics.service';
+import { Component, Input } from '@angular/core';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+/*import { setTimeout } from 'timers';*/
+import{ GlobalConstant } from './common/globalconstant';
 
+import {HttpClientModule} from '@angular/common/http';
+import { ModulehttpService } from './modulehttp.service';
+
+
+import { environment } from '../environments/environment';
 @Component({
-  selector: 'fi-app',
-  template: '<router-outlet></router-outlet>',
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  isAuth = false;
+  gl = GlobalConstant.siteTitle;
+  title = 'FridgeToPlate';
+  recvjson=[];
 
-  constructor(private analytics: AnalyticsService) {
-  }
+
+  constructor(){}
 
   ngOnInit(): void {
-    this.analytics.trackPageViews();
-  }
+
+
+}
+
+
 }
