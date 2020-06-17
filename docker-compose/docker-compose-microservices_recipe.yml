@@ -60,7 +60,7 @@ services:
       retries: 3
     volumes:
       - pgdata-recipe:/var/lib/postgresql/data
-      #- ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
     restart: on-failure
     stdin_open: true
     tty: true
@@ -84,6 +84,11 @@ services:
        - kafka
        - recipe-database
 
+
+  web-ui:
+    image: web-ui:latest
+    ports:
+      - "80:80"
 
 volumes:
    pgdata-recipe:

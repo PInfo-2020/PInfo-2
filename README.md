@@ -13,6 +13,7 @@ Repository for PInfo-2020's team 2
 - Julien Mehmeti
 - Kathleen Favre
 
+
 ## JSON Format:  
 Ajout d'un ingrédient: 
 ```
@@ -52,7 +53,7 @@ preptime: "<temps de préparation total>"
 ## Rest Format: 
 ```http://localhost:<port>/<page>/``` à compléter en fonction du cas. Par défaut <port> vaut 80.
 
--poster une recette: ```myfridge/myingredient/post```  
+-poster un ingredient: ```myfridge/myingredient/post```  
 -supprimer un ingrédient: ```myfridge/myingredient/delete```  
 
 
