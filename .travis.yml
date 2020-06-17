@@ -39,7 +39,11 @@ jobs:
     - echo "$DOCKER_USERNAME"
     - echo "$DOCKER_PASSWORD" | docker login --username="$DOCKER_USERNAME" --password-stdin
     - docker tag unige/user-service pinfo2/user-service:latest
-    - docker push pinfo2/user-service:latest 
+    - docker push pinfo2/user-service:latest
+    - docker tag unige/ingredient-service pinfo2/ingredient-service:latest
+    - docker push pinfo2/ingredient-service:latest
+    - docker tag unige/recipe-service pinfo2/recipe-service:latest
+    - docker push pinfo2/recipe-service:latest
 
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
     #- docker tag unige/regulatory-service tropin98/regulatory-service:latest
