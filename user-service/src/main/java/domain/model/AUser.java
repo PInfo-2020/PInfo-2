@@ -2,18 +2,7 @@ package domain.model;
 
 import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +12,7 @@ import domain.model.FridgeItem;
 
 @Data
 @Entity
+@Table(name ="AUser")
 //@DiscriminatorColumn(name = "id")
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
@@ -54,11 +44,7 @@ public class AUser {
 	@NotNull
 	private int ratingDenum;
 
-	@JsonIgnore
-	@OneToMany(
-		cascade = CascadeType.ALL,
-		orphanRemoval = true
-	)
+	@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true )
 	@JoinColumn(name="user_id")
 	private List<FridgeItem> fridgeItems;
 

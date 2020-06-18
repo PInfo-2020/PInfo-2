@@ -15,11 +15,15 @@ public interface UserService {
 
 	AUser get(Long userId);
 
-	AUser addFridgeitem( Long userId, FridgeItem fi );
+	FridgeItem getFridgeItem(Long fi_id);
 
-	AUser removeFridgeitem( Long userId, Long fi_id );
+	void addFridgeitem( Long userId, Long fi_id );
 
-	AUser replaceFridgeitem( Long userId, Long fi_id, FridgeItem fi_new );
+	void removeFridgeitem( Long userId, Long fi_id );
 
-	AUser clearFridge( Long userId );
+	void replaceFridgeitem( Long userId, Long fi_id, Long fi_new_id );
+
+	void clearFridge( Long userId );
+
+	Long createFridgeItem(FridgeItem fi);
 }

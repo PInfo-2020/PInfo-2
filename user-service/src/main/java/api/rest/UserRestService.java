@@ -69,8 +69,8 @@ public class UserRestService {
 	@ApiOperation(value = "Update a given AUser",
     notes = "Add a fridge item.")
 	public void update(@PathParam("id") Long userId, FridgeItem fi) {
-		AUser user = userService.addFridgeitem( userId, fi );
-		userProducer.send(user);
+		userService.addFridgeitem( userId, userService.createFridgeItem( fi ) );
+		userProducer.send( userService.get(userId) );
 	}
 
 
@@ -80,8 +80,8 @@ public class UserRestService {
 	@ApiOperation(value = "Update a given AUser",
     notes = "Add a fridge item.")
 	public void update(@PathParam("id") Long userId, @PathParam("id2") Long fi_id) {
-		AUser user = userService.removeFridgeitem( userId, fi_id );
-		userProducer.send(user);
+		userService.removeFridgeitem( userId, fi_id );
+		userProducer.send( userService.get(userId) );
 	}
 
 
@@ -92,8 +92,8 @@ public class UserRestService {
 	@ApiOperation(value = "Update a given AUser",
     notes = "Add a fridge item.")
 	public void update(@PathParam("id") Long userId, @PathParam("id2") Long fi_id, FridgeItem fi_new ) {
-		AUser user = userService.replaceFridgeitem( userId, fi_id, fi_new );
-		userProducer.send(user);
+		userService.replaceFridgeitem( userId, fi_id, userService.createFridgeItem( fi_new ) );
+		userProducer.send( userService.get(userId) );
 	}
 
 
@@ -103,8 +103,8 @@ public class UserRestService {
 	@ApiOperation(value = "Update a given AUser",
     notes = "Add a fridge item.")
 	public void update(@PathParam("id") Long userId ) {
-		AUser user = userService.clearFridge( userId );
-		userProducer.send(user);
+		userService.clearFridge( userId );
+		userProducer.send( userService.get(userId) );
 	}
 	// public void replaceFridgeitem(FridgeItem to_replace, FridgeItem other)
 	// public void clearFridge()

@@ -46,56 +46,71 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AUser addFridgeitem( Long userId, FridgeItem fi ) {
+	@Transactional
+	public void addFridgeitem( Long userId, Long fi_id ) {
 		AUser user = this.get(userId);
-		if (user==null) {
+		FridgeItem fi = this.getFridgeItem( fi_id );
+		if (user==null)
 			throw new IllegalArgumentException("AUser does not exist : " + userId);
-		}
-		user.addFridgeitem(fi);
-		return user;
-	}
-
-	@Override
-	public AUser removeFridgeitem( Long userId, Long fi_id ) {
-		AUser user = this.get(userId);
-		FridgeItem fi = em.find(FridgeItem.class, fi_id);
-		if (user==null) {
-			throw new IllegalArgumentException("AUser does not exist : " + userId);
-		}
-		if (fi==null) {
+		if (fi==null)
 			throw new IllegalArgumentException("FridgeItem does not exist : " + fi_id);
-		}
-		user.removeFridgeitem(fi);
-		return user;
+
+		user.addFridgeitem(fi);
+		em.merge(user);
+		em.merge(fi);
 	}
 
 	@Override
-	public AUser replaceFridgeitem( Long userId, Long fi_id, FridgeItem fi_new ) {
+	@Transactional
+	public void removeFridgeitem( Long userId, Long fi_id ) {
 		AUser user = this.get(userId);
-		FridgeItem fi = em.find(FridgeItem.class, fi_id);
+		FridgeItem fi = this.getFridgeItem( fi_id );
+		if (user==null)
+			throw new IllegalArgumentException("AUser does not exist : " + userId);
+		if (fi==null)
+			throw new IllegalArgumentException("FridgeItem does not exist : " + fi_id);
+
+		user.removeFridgeitem(fi);
+		em.remove(fi);
+		em.merge(user);
+	}
+
+	@Override
+	@Transactional
+	public void replaceFridgeitem( Long userId, Long fi_id, Long fi_new_id ) {
+		AUser user = this.get(userId);
+		FridgeItem fi = this.getFridgeItem( fi_id );
+		FridgeItem fi_new = this.getFridgeItem( fi_new_id );
 		if (user==null) {
 			throw new IllegalArgumentException("AUser does not exist : " + userId);
 		}
-		if (fi==null) {
+		if (fi == null || fi_new == null) {
 			throw new IllegalArgumentException("FridgeItem does not exist : " + fi_id);
 		}
 		user.replaceFridgeitem(fi, fi_new);
-		return user;
+		em.remove(fi);
+		em.merge(user);
 	}
 
 	@Override
-	public AUser clearFridge( Long userId ) {
+	@Transactional
+	public void clearFridge( Long userId ) {
 		AUser user = this.get(userId);
 		if (user==null) {
 			throw new IllegalArgumentException("AUser does not exist : " + userId);
 		}
 		user.clearFridge();
-		return user;
+		em.merge(user);
 	}
 
 	@Override
 	public AUser get(Long userId) {
 		return em.find(AUser.class, userId);
+	}
+
+	@Override
+	public FridgeItem getFridgeItem(Long fi_id) {
+		return em.find(FridgeItem.class, fi_id);
 	}
 
 	@Override
@@ -106,5 +121,16 @@ public class UserServiceImpl implements UserService {
 		}
 		em.persist(new AUser(user));
 
+	}
+
+	@Override
+	@Transactional
+	public Long createFridgeItem(FridgeItem fi) {
+		if ( fi.getId() != null ) {
+			throw new IllegalArgumentException("FridgeItem already exists : " + fi.getId());
+		}
+		FridgeItem fi_persist = new FridgeItem(fi);
+		em.persist(fi_persist);
+		return fi_persist.getId();
 	}
 }
