@@ -10,7 +10,9 @@ public interface RecipeService {
 
 	void update(Recipe recipe);
 
-	void create(Recipe recipe);
+	long create(Recipe recipe);
 
 	Recipe get(Long recipeId);
+
+	void removeRecipe(Long recipeId);
 }

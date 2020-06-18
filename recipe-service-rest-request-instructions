@@ -2,7 +2,135 @@
 >Run     user-service with './start-user-database.sh'
 
 >Request GET  to http://localhost:15555/recipe
+
 >Request POST to http://localhost:15555/recipe/post
+  Request Body exemple:
+   {
+        "name":"Pizza Margherita",
+        "authorID":2,
+        "image":"",
+        "description":"Easy and fast",
+        "prepText":"Blabla 123",
+        "prepTime":30,
+        "servings":4,
+        "grade":0.0,
+        "recipeIngredients":[
+          { "name":"flour",
+            "image":"don't need ",
+            "quantity": 400,
+            "unit":1
+          },
+          {"name":"mozzarella",
+           "image":"dfdsfs",
+           "quantity": 200,
+           "unit":1
+           }
+        ]
+   }
+      ----------------------------------------------
+       {
+           "name":"Mixed Salad",
+           "authorID":1,
+           "image":"",
+           "description":"Summer fresh",
+           "prepText":"Blabla 12",
+           "prepTime":15,
+           "servings":4,
+           "grade":0.0,
+           "recipeIngredients":[
+             { "name":"Batavia salad",
+               "image":"don't need ",
+               "quantity": 150,
+               "unit":1
+             },
+             {"name":"carrot",
+              "image":"dfdsfs",
+              "quantity": 200,
+              "unit":1
+              },
+               {"name":"cucumber",
+                "image":"dfdsfs",
+                 "quantity": 100,
+                  "unit":1
+               },
+               {"name":"olive oil",
+                            "image":"dfdsfs",
+                             "quantity": 60,
+                              "unit":1
+                           }
+           ]
+      }
+      ---------------------------------------------
+
+       {
+                 "name":"oat porridge ",
+                 "authorID":1,
+                 "image":"",
+                 "description":"Fast and healthy",
+                 "prepText":"Blabla 1322322",
+                 "prepTime":15,
+                 "servings":4,
+                 "grade":0.0,
+                 "recipeIngredients":[
+                   { "name":"oat flakes",
+                     "image":"don't need ",
+                     "quantity": 100,
+                     "unit":1
+                   },
+                   {"name":"milk",
+                    "image":"dfdsfs",
+                    "quantity": 500,
+                    "unit":1
+                    },
+                     {"name":"water",
+                      "image":"dfdsfs",
+                       "quantity": 500,
+                        "unit":1
+                     },
+                     {"name":"salt",
+                                  "image":"dfdsfs",
+                                   "quantity": 5,
+                                    "unit":1
+                                 }
+                 ]
+            }
+
+>Request PUT to http://localhost:15555/recipe/put
+Body exemple
+    {
+        "id": 2,
+        "name":"Pizza Margherita",
+        "authorID":2,
+        "image":"",
+        "description":"Easy and fast",
+        "prepText":"Blabla 123",
+        "prepTime":30,
+        "servings":4,
+        "grade":0.0,
+        "recipeIngredients":[
+          { "name":"flour",
+            "image":"don't need ",
+            "quantity": 400,
+            "unit":1
+          },
+          {"name":"mozzarella",
+           "image":"dfdsfs",
+           "quantity": 200,
+           "unit":1
+           },
+            {"name":"tomato concentrate",
+             "image":"dfdsfs",
+              "quantity": 50,
+               "unit":1
+            },
+            {"name":"tomato concentrate",
+            "image":"dfdsfs",
+            "quantity":50,
+            "unit":1}
+        ]
+   }
+
+
 >Add to header : Content-Type: application/json
 >Chech header content-length high enough, ex : Content-Length: 348
 
