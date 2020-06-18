@@ -36,6 +36,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	@Transactional
 	public void update(Recipe recipe) {
 		Recipe i = em.find(Recipe.class, recipe.getId());
 		if (i == null) {
@@ -45,17 +46,28 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
-	public Recipe get(Long recipeId) {
+	public Recipe get(Long recipeId)
+	{
 		return em.find(Recipe.class, recipeId);
 	}
 
 	@Override
 	@Transactional
-	public void create(Recipe recipe) {
-		/*if ( recipe.getId() != null or get(recipe.getId())!=null ) {
+	public long create(Recipe recipe) {
+		if ( recipe.getId() != null  ) {
 			throw new IllegalArgumentException("Recipe already exists : " + recipe.getId());
-		}*/
+		}
 		em.persist(recipe);
-		
+		return  recipe.getId();
 	}
+
+	@Override
+	@Transactional
+	public void removeRecipe(Long recipeId){
+		Recipe rcp = em.find(Recipe.class, recipeId);
+		if (rcp == null) {
+			throw new IllegalArgumentException("Recipe with Id " + recipeId + "does not exist");
+		}
+		em.remove(rcp);
+	};
 }
