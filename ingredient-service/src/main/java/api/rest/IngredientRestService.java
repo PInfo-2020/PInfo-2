@@ -48,8 +48,8 @@ public class IngredientRestService {
 	@Path("/search/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "retrieve all products containing requested name")
-	public List<Ingredient> searchByName(@PathParam("name") String productType) {
-		return ingredientService.searchByName(productType);
+	public List<Ingredient> searchByName(@PathParam("name") String name) {
+		return ingredientService.searchByName(name);
 	}
 
 	@GET
@@ -76,4 +76,12 @@ public class IngredientRestService {
 		ingredientService.update(product);
 	}
 
+
+	@DELETE              //authenticated user only
+	@Path("/delete/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation(value= "Remove a product")
+	public void removeRecipe(@PathParam("name") String name ) {
+		ingredientService.removeIngredient(name);
+	}
 }
