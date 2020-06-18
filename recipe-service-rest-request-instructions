@@ -1,9 +1,15 @@
 >Compile user-service with './make_user_service.sh'
 >Run     user-service with './start-user-database.sh'
 
->Request GET  to http://localhost:15555/recipe
+>Request GET all recipies
+    to http://localhost:15555/recipe
+>Request GET  one recipe by Id
+    to http://localhost:15555/recipe/{id}
 
 >Request POST to http://localhost:15555/recipe/post
+>Add to header : Content-Type:application/json
+>Chech header content-length high enough, ex : Content-Length: 500
+
   Request Body exemple:
    {
         "name":"Pizza Margherita",
@@ -95,8 +101,11 @@
                  ]
             }
 
->Request PUT to http://localhost:15555/recipe/put
-Body exemple
+>Request PUT to http://localhost:15555/recipe/update
+>Add to header : Content-Type:application/json
+>Chech header content-length high enough, ex : Content-Length: 500
+>Body exemple
+
     {
         "id": 2,
         "name":"Pizza Margherita",
@@ -131,10 +140,8 @@ Body exemple
    }
 
 
->Add to header : Content-Type: application/json
->Chech header content-length high enough, ex : Content-Length: 348
+>Request DELETE  one recipe by Id
+    to http://localhost:15555/recipe/delete/{id}
 
-> content ex :
-{
-"name":"test"
-}
+
+
