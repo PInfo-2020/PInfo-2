@@ -88,6 +88,9 @@
     "units":"par 100 g de portion comestible"
     }
 
+ -delete ingredient:
+     DELETE
+     http://localhost:11080/ingredients/delete/{name}
 
 
 
