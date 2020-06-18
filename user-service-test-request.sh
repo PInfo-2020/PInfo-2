@@ -1,6 +1,6 @@
 # POST requests to check if user-service and user-database are working
 # README : this script is an example, with fixed id numbers that may not work on your machine.
-echo -e '\n\nCreating a user'
+echo -e '\nCreating a user'
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"name":"test","email":"test_short@testmail.com"}' \
