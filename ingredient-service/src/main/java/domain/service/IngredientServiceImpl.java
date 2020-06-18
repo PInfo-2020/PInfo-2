@@ -121,7 +121,8 @@ public class IngredientServiceImpl implements IngredientService {
 		if  (compareElement == null) {
 			throw new IllegalArgumentException("Product does not exist : " + product.getProductName());
 		} else {
-			if (product.getId() != compareElement.getId()){
+			if (!product.getId().equals(compareElement.getId())){
+				log.info("Product Id is :" + product.getId() + " Copared id is :" + compareElement.getId() );
 				throw new IllegalArgumentException("Duplicate name: " + product.getProductName());
 			}
 		}
