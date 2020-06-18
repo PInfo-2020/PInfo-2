@@ -33,5 +33,5 @@ alter table RecipeIngredient
     foreign key (Recipe_ID)
     references Recipe;
 
-    GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public to rcp;
-    GRANT SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public to rcp;
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public to rcp;
+GRANT SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public to rcp;

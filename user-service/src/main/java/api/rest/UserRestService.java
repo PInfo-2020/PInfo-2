@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import api.msg.UserProducer;
 import domain.model.AUser;
+import domain.model.FridgeItem;
 import domain.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,12 +53,61 @@ public class UserRestService {
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Update a given AUser",
     notes = "AUsers are specialized and thus might contain more fields than the one of the base class.")
-	public void upadte(AUser user) {
+	public void update(AUser user) {
 		userService.update(user);
 		userProducer.send(user);
 	}
+
+
+	@PUT
+	@Path("{id}/addFridgeitem")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Update a given AUser",
+    notes = "Add a fridge item.")
+	public void update(@PathParam("id") Long userId, FridgeItem fi) {
+		userService.addFridgeitem( userId, userService.createFridgeItem( fi ) );
+		userProducer.send( userService.get(userId) );
+	}
+
+
+	@PUT
+	@Path("{id}/removeFridgeitem/{id2}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Update a given AUser",
+    notes = "Add a fridge item.")
+	public void update(@PathParam("id") Long userId, @PathParam("id2") Long fi_id) {
+		userService.removeFridgeitem( userId, fi_id );
+		userProducer.send( userService.get(userId) );
+	}
+
+
+	@PUT
+	@Path("{id}/replaceFridgeitem/{id2}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Update a given AUser",
+    notes = "Add a fridge item.")
+	public void update(@PathParam("id") Long userId, @PathParam("id2") Long fi_id, FridgeItem fi_new ) {
+		userService.replaceFridgeitem( userId, fi_id, userService.createFridgeItem( fi_new ) );
+		userProducer.send( userService.get(userId) );
+	}
+
+
+	@PUT
+	@Path("{id}/clearFridge")
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Update a given AUser",
+    notes = "Add a fridge item.")
+	public void update(@PathParam("id") Long userId ) {
+		userService.clearFridge( userId );
+		userProducer.send( userService.get(userId) );
+	}
+	// public void replaceFridgeitem(FridgeItem to_replace, FridgeItem other)
+	// public void clearFridge()
 
 	@POST
 	@Path("post")

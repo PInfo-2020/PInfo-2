@@ -2,22 +2,17 @@ package domain.model;
 
 import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import domain.model.FridgeItem;
 
 @Data
 @Entity
+@Table(name ="AUser")
 //@DiscriminatorColumn(name = "id")
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // No subclass yet
@@ -49,20 +44,30 @@ public class AUser {
 	@NotNull
 	private int ratingDenum;
 
+	@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true )
+	@JoinColumn(name="user_id")
+	private List<FridgeItem> fridgeItems;
+
 	public AUser(){
 		this.name  = null;
 		this.email = null;
 		this.registerDate = null;
 		this.ratingNum = 0;
 		this.ratingDenum = 0;
+		this.fridgeItems = new ArrayList<FridgeItem>();
 	}
 
-	public AUser( Long id, String name, String email, Date registerDate, int ratingNum, int ratingDenum ){
+	public AUser( Long id, String name, String email, Date registerDate, int ratingNum, int ratingDenum, List<FridgeItem> fridgeItems ){
 		this.name  = name;
 		this.email = email;
 		this.registerDate = (registerDate == null) ? new Date() : registerDate;
 		this.ratingNum = ratingNum;
 		this.ratingDenum = ratingDenum;
+		if (fridgeItems != null && !(fridgeItems.isEmpty()) ) {
+			this.fridgeItems = fridgeItems;
+		} else {
+			this.fridgeItems = new ArrayList<FridgeItem>();
+		}
 	}
 
 	public AUser( AUser usr ){
@@ -71,6 +76,7 @@ public class AUser {
 		this.registerDate = new Date();
 		this.ratingNum = 0;
 		this.ratingDenum = 0;
+		this.fridgeItems = new ArrayList<FridgeItem>();
 	}
 
 	public Long getId() {
@@ -83,6 +89,26 @@ public class AUser {
 
 	public String getEmail() {
 		return this.email;
+	}
+
+	public List<FridgeItem> getFridgeitems(){
+		return this.fridgeItems;
+	}
+
+	public void addFridgeitem(FridgeItem other){
+		this.fridgeItems.add(other);
+	}
+
+	public void removeFridgeitem(FridgeItem other){
+		this.fridgeItems.remove(other);
+	}
+
+	public void replaceFridgeitem(FridgeItem to_replace, FridgeItem other){
+		this.fridgeItems.set(this.fridgeItems.indexOf(to_replace), other);
+	}
+
+	public void clearFridge(){
+		this.fridgeItems.clear();
 	}
 
 }
