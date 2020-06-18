@@ -89,7 +89,7 @@ services:
     container_name: user-database
     hostname: user-database
     networks:
-     - backend-network
+      - backend-network
     environment:
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: usr
@@ -122,55 +122,55 @@ services:
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_USER_DASH_NAME: 'usr'
       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_AUSERDS_PASSWORD: 'usr'
     depends_on:
-       - kafka
-       - user-database
+      - kafka
+      - user-database
 
-   recipe-database:
-     image: postgres:10
-     container_name: recipe-database
-     hostname: recipe-database
-     networks:
+  recipe-database:
+    image: postgres:10
+    container_name: recipe-database
+    hostname: recipe-database
+    networks:
       - backend-network
-     environment:
-       POSTGRES_USER: rcp
-       POSTGRES_PASSWORD: rcp
-       POSTGRES_DB: recipe
-     healthcheck:
-       test: ["CMD", "pg_isready", "-U", "rcp", "-d", "recipe"]
-       interval: 30s
-       timeout: 30s
-       retries: 3
-     volumes:
-       - pgdata-recipe:/var/lib/postgresql/data
-       - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
-     restart: on-failure
-     stdin_open: true
-     tty: true
+    environment:
+      POSTGRES_USER: rcp
+      POSTGRES_PASSWORD: rcp
+      POSTGRES_DB: recipe
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "rcp", "-d", "recipe"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-recipe:/var/lib/postgresql/data
+      - ./test-data/recipe.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: on-failure
+    stdin_open: true
+    tty: true
 
-   recipe-service:
-     container_name: recipe-service
-     image: unige/recipe-service:latest
-     hostname: recipe-service
-     networks:
-       - backend-network
-     ports:
-       - "15555:27777"
-     environment:
-       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
-       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
-       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_CONNECTION_DASH_URL: "jdbc:postgresql://recipe-database:5432/recipe"
-       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_DRIVER_DASH_NAME: 'postgresql'
-       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_USER_DASH_NAME: 'rcp'
-       THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_PASSWORD: 'rcp'
-     depends_on:
-        - kafka
-        - recipe-database
+  recipe-service:
+    container_name: recipe-service
+    image: unige/recipe-service:latest
+    hostname: recipe-service
+    networks:
+      - backend-network
+    ports:
+      - "15555:27777"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_CONNECTION_DASH_URL: "jdbc:postgresql://recipe-database:5432/recipe"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_DRIVER_DASH_NAME: 'postgresql'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_USER_DASH_NAME: 'rcp'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_RECIPEDS_PASSWORD: 'rcp'
+    depends_on:
+      - kafka
+      - recipe-database
 
 
-   web-ui:
-     image: web-ui:latest
-     ports:
-       - "8080:80"
+  web-ui:
+    image: web-ui:latest
+    ports:
+      - "8080:80"
 
 volumes:
   pgdata-ingr:
