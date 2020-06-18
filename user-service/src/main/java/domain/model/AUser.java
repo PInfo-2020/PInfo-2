@@ -46,7 +46,7 @@ public class AUser {
 
 	@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true )
 	@JoinColumn(name="user_id")
-	private List<FridgeItem> fridgeItems;
+	private List<FridgeItem> fridge;
 
 	public AUser(){
 		this.name  = null;
@@ -54,19 +54,19 @@ public class AUser {
 		this.registerDate = null;
 		this.ratingNum = 0;
 		this.ratingDenum = 0;
-		this.fridgeItems = new ArrayList<FridgeItem>();
+		this.fridge = new ArrayList<FridgeItem>();
 	}
 
-	public AUser( Long id, String name, String email, Date registerDate, int ratingNum, int ratingDenum, List<FridgeItem> fridgeItems ){
+	public AUser( Long id, String name, String email, Date registerDate, int ratingNum, int ratingDenum, List<FridgeItem> fridge ){
 		this.name  = name;
 		this.email = email;
 		this.registerDate = (registerDate == null) ? new Date() : registerDate;
 		this.ratingNum = ratingNum;
 		this.ratingDenum = ratingDenum;
-		if (fridgeItems != null && !(fridgeItems.isEmpty()) ) {
-			this.fridgeItems = fridgeItems;
+		if (fridge != null && !(fridge.isEmpty()) ) {
+			this.fridge = fridge;
 		} else {
-			this.fridgeItems = new ArrayList<FridgeItem>();
+			this.fridge = new ArrayList<FridgeItem>();
 		}
 	}
 
@@ -76,7 +76,7 @@ public class AUser {
 		this.registerDate = new Date();
 		this.ratingNum = 0;
 		this.ratingDenum = 0;
-		this.fridgeItems = new ArrayList<FridgeItem>();
+		this.fridge = new ArrayList<FridgeItem>();
 	}
 
 	public Long getId() {
@@ -91,24 +91,20 @@ public class AUser {
 		return this.email;
 	}
 
-	public List<FridgeItem> getFridgeitems(){
-		return this.fridgeItems;
-	}
-
 	public void addFridgeitem(FridgeItem other){
-		this.fridgeItems.add(other);
+		this.fridge.add(other);
 	}
 
 	public void removeFridgeitem(FridgeItem other){
-		this.fridgeItems.remove(other);
+		this.fridge.remove(other);
 	}
 
 	public void replaceFridgeitem(FridgeItem to_replace, FridgeItem other){
-		this.fridgeItems.set(this.fridgeItems.indexOf(to_replace), other);
+		this.fridge.set(this.fridge.indexOf(to_replace), other);
 	}
 
 	public void clearFridge(){
-		this.fridgeItems.clear();
+		this.fridge.clear();
 	}
 
 }
