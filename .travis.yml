@@ -33,7 +33,7 @@ jobs:
     #- mvn install -Ppackage-docker-image -rf :user-service -Dmaven.test.skip=true
   - stage: Build
     script:
-    - mvn install -Ppackage-docker-image -rf :user-service ingredient-service recipe-service -Dmaven.test.skip=true
+    - mvn install -Ppackage-docker-image  -Dmaven.test.skip=true
     - echo "$DOCKER_USERNAME"
     - echo "$DOCKER_PASSWORD" | docker login --username="$DOCKER_USERNAME" --password-stdin
     - docker tag unige/user-service pinfo2/user-service:latest
