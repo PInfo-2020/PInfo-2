@@ -4,13 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import api.msg.RecipeProducer;
@@ -50,16 +44,17 @@ public class RecipeRestService {
 	}
 
 
-	@PUT
+	@PUT                  //authenticated user only
+	@Path("update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Update a given Recipe",
     notes = "Recipes are specialized and thus might contain more fields than the one of the base class.")
-	public void upadte(Recipe recipe) {
+	public void update(Recipe recipe) {
 		recipeService.update(recipe);
-		recipeProducer.send(recipe);
+		//recipeProducer.send(recipe);
 	}
 
-	@POST
+	@POST                 //authenticated user only
 	@Path("post")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Create a new Recipe",
@@ -72,6 +67,13 @@ public class RecipeRestService {
 		System.out.println(recipe);
 	}
 
+	@DELETE              //authenticated user only
+	@Path("/delete/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation(value= "Remove a Recipe")
+	public void removeRecipe(@PathParam("id") long id) {
+		recipeService.removeRecipe(id);
+	}
 
 	@POST
 	@Path("propagateAllRecipes")

@@ -38,9 +38,14 @@ jobs:
     - mvn install -Ppackage-docker-image -rf :ingredient-service -Dmaven.test.skip=true
     - echo "$DOCKER_USERNAME"
     - echo "$DOCKER_PASSWORD" | docker login --username="$DOCKER_USERNAME" --password-stdin
-    - docker tag unige/user-service unige/user-service:latest
-    - docker push marktropin/user-service:latest 
-
+    - docker tag unige/user-service pinfo2/user-service:latest
+    - docker push pinfo2/user-service:latest
+    - docker tag unige/ingredient-service pinfo2/ingredient-service:latest
+    - docker push pinfo2/ingredient-service:latest
+    - docker tag unige/recipe-service pinfo2/recipe-service:latest
+    - docker push pinfo2/recipe-service:latest
+    #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=PInfo-2020_PInfo-2
+    
     #- docker tag unige/api-gateway tropin98/api-gateway:latest
     #- docker tag unige/regulatory-service tropin98/regulatory-service:latest
     #- docker tag unige/valuation-service tropin98/valuation-service:latest
