@@ -1,0 +1,26 @@
+[Notes]
+root="/user"
+"Returns" means "sends back a JSON object"
+'{something}' is a string parameter. Here they are id's, which MUST BE INTEGERS
+  >>example : PUT 'root/{id}/addFridgeitem' ==> PUT '/user/87370952/addFridgeitem'
+'(*)' means that an input JSON object is expected
+This file may contain deprecated API information. File 'UserRestService.java' contains the actual API code.
+As of writing, most of this API functionality is untested.
+
+
+[GET]
+path=root : returns all users
+path=root/{id} : returns the user with id '{id}', if it exists
+
+
+[PUT]
+path=root : (*) replaces the existing object (match with id of provided object) with provided object, usually as a means to 'update' it.
+path=root/{id}/addFridgeitem : (*) adds provided FridgeItem to the user with id '{id}', if it exists
+path=root/{id}/removeFridgeitem/{id2} : removes FridgeItem with id '{id2}' from the user with id '{id}', if it exists
+path=root/{id}/replaceFridgeitem/{id2} : (*) replaces FridgeItem with id '{id2}' from the user with id '{id}' with the provided FridgeItem
+path=root/{id}/clearFridge : empties the fridge of the user with id '{id}', if it exists
+Note : all PUT executions return the modified user if executed correctly
+
+[POST]
+path=root/post : (*) creates a user from provided AUser object
+path=root/propagateAllAUsers : TODO

@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
 import domain.model.AUser;
+import domain.model.FridgeItem;
 
 @ApplicationScoped
 @Log
@@ -42,6 +43,54 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("AUser does not exist : " + user.getId());
 		}
 		em.merge(user);
+	}
+
+	@Override
+	public AUser addFridgeitem( Long userId, FridgeItem fi ) {
+		AUser user = this.get(userId);
+		if (user==null) {
+			throw new IllegalArgumentException("AUser does not exist : " + userId);
+		}
+		user.addFridgeitem(fi);
+		return user;
+	}
+
+	@Override
+	public AUser removeFridgeitem( Long userId, Long fi_id ) {
+		AUser user = this.get(userId);
+		FridgeItem fi = em.find(FridgeItem.class, fi_id);
+		if (user==null) {
+			throw new IllegalArgumentException("AUser does not exist : " + userId);
+		}
+		if (fi==null) {
+			throw new IllegalArgumentException("FridgeItem does not exist : " + fi_id);
+		}
+		user.removeFridgeitem(fi);
+		return user;
+	}
+
+	@Override
+	public AUser replaceFridgeitem( Long userId, Long fi_id, FridgeItem fi_new ) {
+		AUser user = this.get(userId);
+		FridgeItem fi = em.find(FridgeItem.class, fi_id);
+		if (user==null) {
+			throw new IllegalArgumentException("AUser does not exist : " + userId);
+		}
+		if (fi==null) {
+			throw new IllegalArgumentException("FridgeItem does not exist : " + fi_id);
+		}
+		user.replaceFridgeitem(fi, fi_new);
+		return user;
+	}
+
+	@Override
+	public AUser clearFridge( Long userId ) {
+		AUser user = this.get(userId);
+		if (user==null) {
+			throw new IllegalArgumentException("AUser does not exist : " + userId);
+		}
+		user.clearFridge();
+		return user;
 	}
 
 	@Override

@@ -15,5 +15,8 @@ curl --header "Content-Type: application/json" \
 #   --data '{"name":"test2","email":"test2@testmail.com"}' \
 #   http://localhost:11081/user/post/
 
+
+
+
 # This command should return a list of previously POSTed users
 curl -X GET http://localhost:11081/user/
