@@ -88,7 +88,7 @@ services:
   web-ui:
     image: web-ui:latest
     ports:
-      - "80:80"
+      - "81:80"
 
 volumes:
    pgdata-recipe:
