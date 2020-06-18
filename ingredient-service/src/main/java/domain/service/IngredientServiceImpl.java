@@ -127,4 +127,15 @@ public class IngredientServiceImpl implements IngredientService {
 		}
 		em.merge(product);
 	}
+
+	@Override
+	@Transactional
+	public void removeIngredient(String name){
+		log.info("IngredientServiceImpl remove ingredient");
+		Ingredient ingr = get(name) ;
+		if (ingr == null) {
+			throw new IllegalArgumentException("Product named '" + name + "' does not exist");
+		}
+		em.remove(ingr);
+	};
 }

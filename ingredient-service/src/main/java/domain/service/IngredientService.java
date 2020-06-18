@@ -12,4 +12,5 @@ public interface IngredientService {
 	List<Ingredient> searchByName(String name);
 	Long create(Ingredient product);
 	void update(Ingredient product);
+	void removeIngredient(String name);
 }
