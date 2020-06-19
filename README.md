@@ -6,12 +6,12 @@ Repository for PInfo-2020's team 2
 
 ## Team members:
 
-- Svetlana Reisone: Chef de projet
-- Mark Tropin: Admin système
-- David Rodriguez Soares
-- Loan Hérault
-- Julien Mehmeti
-- Kathleen Favre
+- Svetlana Reisone: Chef de projet (SvetlanaReisone)
+- Mark Tropin: Admin système (tropin98, kotleta2007)
+- David Rodriguez Soares (DavidRodriguezSoaresCUI)
+- Loan Hérault (JinguMastery)
+- Julien Mehmeti (eikowww)
+- Kathleen Favre (kkF1796)
 
 
 ## JSON Format:  
