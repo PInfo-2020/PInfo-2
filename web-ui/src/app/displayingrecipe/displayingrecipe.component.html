@@ -15,10 +15,6 @@
   <br />
   <br />
  Instructions: {{preptext}}
-  <br /><br />
- Commentaires:  {{commtext}}
-  <br />
-Note:  {{ratinggrade}}
 
 </p>
 
@@ -35,10 +31,4 @@ Note:  {{ratinggrade}}
 </div>
 
 
-<br />
-<input type="text" class="form-control" [(ngModel)]="sendgrade">
-<button class="btn button-success" (click)="sendGrade()">Envoyer note</button>
-<br />
-<textarea rows="8" cols="100" [(ngModel)]="sendcomm"></textarea>
-<button class="btn button-success" (click)="sendComment()">Envoyer commentaire</button>
 <br /><button class="btn button-success" (click)="modifyRecipe()">Modifier recette</button>

@@ -22,45 +22,19 @@ export class FindrecipeComponent implements OnInit {
     console.log("nom  "+this.recipename)
     console.log("personnumber "+this.personnumber)
     console.log("time "+this.preptime)
-    console.log("note  "+this.ratinggrade)
-    console.log("Search button is pressed.")
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_SEARCH_SOME_RECIPE_;
-    var item={
-      name:this.recipename,
-      personnumber:this.personnumber,
-      preptime:this.preptime,
-      grade:this.ratinggrade}
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
-    console.log("réponse du serveur:")
-    console.log("réponse du serveur:"+this.httprest.httpresponse);
-
-
-
+    console.log("note  "+this.ratinggrade);
+    console.log("Search button is pressed.");
 
     (async () => {
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
+    this.httprest.searchRecipe(encodeURI("published:  "+this.recipename));
+    while (this.httprest.recipe_ok_==""){
+      await this.delay(4);
+    }
+    this.httprest.recipe_ok_="";
+    this.searched_recipe_=this.httprest.recipe_list_;
+  })();
 
-      this.httprest.httpresponse=[];
-      this.httprest.recvaddr=GlobalConstant.HTTP_RETURN_SEARCH_RESULT_;
-      this.httprest.restRecv();
-      console.log(this.httprest.httpresponse)
-      console.log(this.httprest.httpresponse.length)
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
-      console.log("connection terminé")
-      console.log(this.httprest.httpresponse);
-      if (this.httprest.httpresponse instanceof Array){
-        this.searched_recipe_=this.httprest.httpresponse;
-      }
-      else{
-        this.searched_recipe_=[this.httprest.httpresponse];
-      }
-    })();
+
 
 
   }

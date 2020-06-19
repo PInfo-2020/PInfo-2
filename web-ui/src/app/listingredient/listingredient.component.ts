@@ -33,10 +33,8 @@ export class ListingredientComponent implements OnInit {
     console.log("Suppression de mes recettes:");
     console.log(item);
     if(this.modeuser==true){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_DELETE_AN_INGREDIENT_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+
+
   }
 
 
@@ -45,13 +43,17 @@ export class ListingredientComponent implements OnInit {
   addIngredient(indexOfelement,ingredient){
     console.log("Ajout de cet ingrédient à mon frigo:");
     console.log(ingredient);
-    GlobalConstant.INGREDIENT_LIST_.push(ingredient);
-    if(this.modeuser==true){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_AN_INGREDIENT_;
-    this.httprest.sendjson=JSON.stringify(ingredient);
-    this.httprest.restSend();
-  }
+    var el={
+      name:ingredient.name,
+      personnumber:"item.personnumber",
+      preptime:"item.preptime",
+      preptext:"item.preptext",
+      ingredientlist:[ingredient]
+
+    }
+    this.httprest.addRecipe("myingredient",el);
+
+
 
   }
 
@@ -61,10 +63,17 @@ export class ListingredientComponent implements OnInit {
     var item={image:this.image,name:this.name,quantity:this.quantity,unit:this.unit};
     this.listingredient.push(item);
     if(this.modeuser==true){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_AN_INGREDIENT_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+      var el={
+        name:item.name,
+        personnumber:"item.personnumber",
+        preptime:"item.preptime",
+        preptext:"item.preptext",
+        ingredientlist:[item]
+
+      }
+      this.httprest.addRecipe("myingredient",el);
+
+
   }
 
 

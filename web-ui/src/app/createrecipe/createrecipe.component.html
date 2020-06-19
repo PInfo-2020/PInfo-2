@@ -10,9 +10,6 @@
   <input type="text" class="form-control" [(ngModel)]="recipename">
 
 
-  <input type="file" (change)="handleUpload($event)">
-  <img src="{{this.im}}" height="200" alt="Aperçu de l’image...">
-
 
   <br />Nombre de personnes:<br />
   <input type="text" class="form-control" [(ngModel)]="personnumber">
@@ -41,10 +38,6 @@ Temps de pr&eacute;paration:
 <p>&nbsp;</p>
 <p>Préparation:<br />
 <textarea rows="8" cols="100" [(ngModel)]="preptext"></textarea>
-</p>
-<p>Description:<br />
-<textarea rows="8" cols="100" [(ngModel)]="descriptiontext"></textarea>
-</p>
 <p>&nbsp;</p>
 
 
@@ -56,14 +49,3 @@ Temps de pr&eacute;paration:
 </div>
 </div>
 </div>
-
-
-
-
-<p>----------------------</p>
-<p>Nom de la recette: {{getRecipeName()}}</p>
-<p>Nombre de personnes: {{getPersonNumber()}}</p>
-<p>Temps de préparation: {{getPreparationTime()}}</p>
-<p>Préparation: {{getPreparationText()}}</p>
-<p>Description: {{getDescriptionText()}}</p>
-<p>----------------------</p>

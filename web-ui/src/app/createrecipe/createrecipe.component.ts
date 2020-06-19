@@ -10,8 +10,7 @@ import { DatabasehttpComponent } from '../databasehttp/databasehttp.component';
 })
 export class CreaterecipeComponent implements OnInit {
   recipename: string ='';/*Name of the recipe.*/
-  im:string='';
-  httpsendmyrecipe="https://lookandcookproject.firebaseio.com/users/defaultuser/myrecipe.json"
+  imag:string='';
   personnumber: string ='';/*How much people.*/
   preptime: string='';/*Preparation time.*/
   preptext: string ='';/*How to prepare recipe.*/
@@ -24,39 +23,25 @@ export class CreaterecipeComponent implements OnInit {
 
 
   saveRecipe(){
-    console.log("PublishRecipe appuyé.")
     var item={
       name:this.recipename,
+      image:String(this.imag),
       personnumber:this.personnumber,
       preptime:this.preptime,
       preptext:this.preptext,
       ingredientlist:this.ingredientlist
 
     }
-    console.log(item)
-    console.log(item)
 
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_MY_RECIPE_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+    this.httprest.addRecipe("myrecipe",item);
+
+
   }
 
   getImage(im){
     return im;
   }
 
-
-  handleUpload(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        console.log(reader.result);
-    };
-    this.im=reader.result.toString();
-    return 0
-}
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );

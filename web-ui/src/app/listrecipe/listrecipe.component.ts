@@ -21,10 +21,15 @@ export class ListrecipeComponent implements OnInit {
   constructor(private httprest: DatabasehttpComponent,private router: Router) { }
 
   deletePublish(indexOfelement,item){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_MY_PUBLICATION_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+
+    (async () => {
+      this.httprest.recvaddr=GlobalConstant.INGREDIENT_DELETE_+item.name;
+      this.httprest.dataDelete();
+      while(this.httprest.httpresponse.length==0){
+        await this.delay(4);
+      }
+    })();
+
     console.log("Suppression de la liste des recettes publiées:");
     console.log(item);
 
@@ -38,42 +43,69 @@ export class ListrecipeComponent implements OnInit {
   }
 
   deleteRecipe(indexOfelement,item){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_DELETE_MY_RECIPE_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+    (async () => {
+    this.httprest.recvaddr=GlobalConstant.INGREDIENT_DELETE_+item.name;
+    this.httprest.dataDelete();
+    while(this.httprest.httpresponse.length==0){
+      await this.delay(4);
+    }
+  })();
+
     console.log("Suppression de mes recettes:");
     console.log(item);
 
   }
 
   deleteFavourite(indexOfelement,item){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_DELETE_MY_FAVOURITE_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+    (async () => {
+      this.httprest.recvaddr=GlobalConstant.INGREDIENT_DELETE_+item.name.replace("published:  ","favourite:    ");
+      this.httprest.dataDelete();
+      while(this.httprest.httpresponse.length==0){
+        await this.delay(4);
+      }
+    })();
+
     console.log("Suppression favori:");
     console.log(item);
 
   }
 
   addPublish(item){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_MY_PUBLICATION_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
+    var el={
+      name:"published:  "+item.name,
+      personnumber:item.personnumber,
+      preptime:item.preptime,
+      preptext:item.preptext,
+      ingredientlist:JSON.parse(item.ingredientlist)
+
+    }
+
+
+    this.httprest.addRecipe("mypublication",el);
+
+
     console.log("Ajout à la liste des recettes publiées:");
     console.log(item);
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
 
   addFavourite(item){
-    this.httprest.httpresponse=[];
-    this.httprest.sendaddr=GlobalConstant.HTTP_POST_MY_FAVOURITE_;
-    this.httprest.sendjson=JSON.stringify(item);
-    this.httprest.restSend();
-    console.log("Ajout favori:");
-    console.log(item);
+    var el={
+      name:"favourite:  "+item.name.substr(10,item.name.length),
+      personnumber:item.personnumber,
+      preptime:item.preptime,
+      preptext:item.preptext,
+      ingredientlist:JSON.parse(item.ingredientlist)
+
+    }
+
+
+    this.httprest.addRecipe("myfavourite",el);
+
 
 
   }

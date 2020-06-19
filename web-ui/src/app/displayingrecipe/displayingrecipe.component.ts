@@ -85,16 +85,7 @@ export class DisplayingrecipeComponent implements OnInit {
     if(GlobalConstant.BUFFER_RECIPE_["ingredientlist"].length!=0){
     this.ingredientlist=JSON.parse(GlobalConstant.BUFFER_RECIPE_["ingredientlist"]);
   }
-    /**/
-    /*(async () => {
-    while (GlobalConstant.BUFFER_RECIPE_.length==0){
-      console.log("****")
-      console.log("****")
-      await this.delay(400);
-    }
-    console.log(GlobalConstant.BUFFER_RECIPE_);
-    console.log(GlobalConstant.BUFFER_RECIPE_);
-  })();*/
+
 
   }
 

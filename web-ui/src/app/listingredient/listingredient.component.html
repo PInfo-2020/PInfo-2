@@ -28,7 +28,7 @@
   <tbody>
   <tr *ngFor="let ingredient of listingredient;let indexOfelement=index;">
     <td><img [src]="ingredient.image" style="width:80px"></td>
-    <td><a href="google.com">{{ ingredient.name }}</a>  </td>
+    <td>{{ ingredient.name }}</td>
     <td>{{ingredient.quantity}}</td>
     <td>{{ ingredient.unit }}X</td>
     <td *ngIf="modeadd === true">

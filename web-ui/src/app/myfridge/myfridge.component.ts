@@ -10,7 +10,6 @@ import { DatabasehttpComponent } from '../databasehttp/databasehttp.component';
 export class MyfridgeComponent implements OnInit {
 
   httprecvmyingredient=GlobalConstant.HTTP_RECV_MY_INGREDIENT_;
-  httpsendmyingredient=GlobalConstant.HTTP_SEND_MY_INGREDIENT_;
 
   ingredientlist=[];
   /*ingredientlist=GlobalConstant.INGREDIENT_LIST_;*/
@@ -32,23 +31,24 @@ export class MyfridgeComponent implements OnInit {
 
   ngOnInit(): void {
     (async () => {
-      this.httprest.httpresponse=[];
-      this.httprest.recvaddr=this.httprecvmyingredient;
-      this.httprest.restRecv();
-      console.log(this.httprest.httpresponse)
-      console.log(this.httprest.httpresponse.length)
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
-      console.log("connection terminé")
-      console.log(this.httprest.httpresponse);
-      if (this.httprest.httpresponse instanceof Array){
-        this.ingredientlist=this.httprest.httpresponse;
-      }
-      else{
-        this.ingredientlist=[this.httprest.httpresponse];
-      }
-    })();
+
+
+    this.httprest.recvRecipeII("myingredient");
+    var flag=0;
+    while (this.httprest.recipe_ok_=="" && flag<20){
+      console.log("wait")
+      await this.delay(4);
+    }
+    this.httprest.recipe_ok_="";
+    var tempor=this.httprest.recipe_list_;
+    console.log(tempor)
+   this.ingredientlist=[];
+   for (const ingr in tempor) {
+     var data=tempor[ingr]['units'];
+     console.log(JSON.parse(data))
+     this.ingredientlist.push(JSON.parse(data));
+    }
+  })();
 
 
   }

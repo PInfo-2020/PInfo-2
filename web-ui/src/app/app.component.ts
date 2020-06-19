@@ -15,7 +15,6 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   isAuth = false;
-  gl = GlobalConstant.siteTitle;
   title = 'FridgeToPlate';
   recvjson=[];
 
@@ -23,7 +22,8 @@ export class AppComponent {
   constructor(){}
 
   ngOnInit(): void {
-
+    console.log("url:")
+    console.log(environment.production)
 
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import{ GlobalConstant } from '../common/globalconstant';
 import { DatabasehttpComponent } from '../databasehttp/databasehttp.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-myrecipe',
@@ -17,9 +18,6 @@ export class MyrecipeComponent implements OnInit {
   httprecvmyfavourite=GlobalConstant.HTTP_RECV_MY_FAVOURITE_;
   httprecvmypublication=GlobalConstant.HTTP_RECV_MY_PUBLICATION_;
   httprecvmyrecipe=GlobalConstant.HTTP_RECV_MY_RECIPE_;
-  httpsendmyfavourite=GlobalConstant.HTTP_SEND_MY_FAVOURITE_;
-  httpsendmypublication=GlobalConstant.HTTP_SEND_MY_PUBLICATION_;
-  httpsendmyrecipe=GlobalConstant.HTTP_SEND_MY_RECIPE_;
 
 
   constructor(private httprest: DatabasehttpComponent) { }
@@ -42,58 +40,47 @@ export class MyrecipeComponent implements OnInit {
 
 
     (async () => {
-      this.httprest.httpresponse=[];
-      this.httprest.recvaddr=this.httprecvmyfavourite;
-      this.httprest.restRecv();
-      console.log(this.httprest.httpresponse)
-      console.log(this.httprest.httpresponse.length)
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
-      console.log("connection terminé")
-      console.log(this.httprest.httpresponse);
-      if (this.httprest.httpresponse instanceof Array){
-        this.recipefavourite=this.httprest.httpresponse;
-      }
-      else{
-        this.recipefavourite=[this.httprest.httpresponse];
-      }
 
 
-      this.httprest.httpresponse=[];
-      this.httprest.recvaddr=this.httprecvmypublication;
-      this.httprest.restRecv();
-      console.log(this.httprest.httpresponse)
-      console.log(this.httprest.httpresponse.length)
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
-      console.log("connection terminé")
-      console.log(this.httprest.httpresponse);
-      if (this.httprest.httpresponse instanceof Array){
-        this.published_recipe_=this.httprest.httpresponse;
-      }
-      else{
-        this.published_recipe_=[this.httprest.httpresponse];
-      }
+      var flag=0;
+    this.httprest.recvRecipe("myrecipe");
+    while (this.httprest.recipe_ok_=="" && flag<20){
+      await this.delay(4);
+      flag+=1;
+    }
+    console.log("------------");
+    console.log(flag);
+    if(flag<20){
+    this.httprest.recipe_ok_="";
+    this.my_recipe_=this.httprest.recipe_list_;
+  }
+  flag=0
 
 
-      this.httprest.httpresponse=[];
-      this.httprest.recvaddr=this.httprecvmyrecipe;
-      this.httprest.restRecv();
-      console.log(this.httprest.httpresponse)
-      console.log(this.httprest.httpresponse.length)
-      while (this.httprest.httpresponse.length==0){
-        await this.delay(4);
-      }
-      console.log("connection terminé")
-      console.log(this.httprest.httpresponse);
-      if (this.httprest.httpresponse instanceof Array){
-        this.my_recipe_=this.httprest.httpresponse;
-      }
-      else{
-        this.my_recipe_=[this.httprest.httpresponse];
-      }
+
+    this.httprest.recvRecipe("myfavourite");
+    while (this.httprest.recipe_ok_=="" && flag<100){
+      await this.delay(4);
+      flag+=1;
+    }
+    if(flag<20){
+    this.httprest.recipe_ok_="";
+    this.recipefavourite=this.httprest.recipe_list_;
+  }
+  flag=0
+
+    this.httprest.recvRecipe("mypublication");
+    while (this.httprest.recipe_ok_=="" && flag<20){
+      await this.delay(4);
+      flag+=1;
+    }
+    if(flag<20){
+    this.httprest.recipe_ok_="";
+    this.published_recipe_=this.httprest.recipe_list_;
+  }
+  flag=0
+
+
 
 
     })();
