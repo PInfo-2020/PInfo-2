@@ -11,4 +11,4 @@ git push deploy master
 # Run Docker-Compose to start the services
 cd PInfo-2
 
-./run_all.sh
+./all_run.sh
