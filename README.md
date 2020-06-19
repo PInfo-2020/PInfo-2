@@ -1,4 +1,4 @@
-# FridgeToPlate
+# Look&Cook
 
 Repository for PInfo-2020's team 2
 
@@ -51,7 +51,7 @@ preptime: "<temps de préparation total>"
 ```
 
 ## Rest Format: 
-```http://localhost:<port>/<page>/``` à compléter en fonction du cas. Par défaut <port> vaut 80.
+```http://localhost:<port>/<page>/``` à compléter en fonction du cas. Par défaut <port> vaut 8080.
 
 -poster un ingredient: ```myfridge/myingredient/post```  
 -supprimer un ingrédient: ```myfridge/myingredient/delete```  
@@ -67,6 +67,8 @@ preptime: "<temps de préparation total>"
  
 -publier recette ```myfridge/mypublication/post```  
 -supprimer des publications ```myfridge/mypublication/delete```  
+
+Voir ```user-service/API``` pour les transactions utilisateurs (gestion de l'utilisateur et son frigo, pas développé ici pour des raisons d'espace).
 
 ## How to set up your project:
 
